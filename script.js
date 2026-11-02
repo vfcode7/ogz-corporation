@@ -59,6 +59,22 @@
   document.querySelectorAll('.hero h1,.head h2,.cta h2,.contact h2').forEach(splitWords);
   setTimeout(() => document.querySelector('.hero h1').classList.add('is-in'), 120);
 
+  // Celular: benefícios recolhíveis nos cards de serviço (no desktop ficam sempre abertos)
+  document.querySelectorAll('.card').forEach((card, n) => {
+    const ul = card.querySelector('ul');
+    if (!ul) return;
+    const list = document.createElement('div'), inner = document.createElement('div'), btn = document.createElement('button');
+    list.className = 'card__list'; list.id = `beneficios-${n + 1}`;
+    ul.replaceWith(list); inner.append(ul); list.append(inner);
+    btn.type = 'button'; btn.className = 'card__toggle'; btn.textContent = 'Ver benefícios';
+    btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-controls', list.id);
+    list.before(btn);
+    btn.addEventListener('click', () => {
+      const open = card.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open); btn.textContent = open ? 'Ocultar benefícios' : 'Ver benefícios';
+    });
+  });
+
   // Entrada escalonada de blocos e textos internos
   document.querySelectorAll('.head,.cta .container>*,.info li,.form,details,.footer__grid>*').forEach(el => el.classList.add('reveal'));
   document.querySelectorAll('.cards,.why,.projects,.steps,.info,.footer__grid').forEach(g =>
@@ -76,6 +92,33 @@
     }), { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
     watched.forEach(el => io.observe(el));
   } else { watched.forEach(show); }
+
+  // Celular: indicadores dos carrosséis de serviços e projetos
+  document.querySelectorAll('.cards,.projects').forEach(track => {
+    const items = [...track.children], nav = document.createElement('div');
+    nav.className = 'dots'; nav.setAttribute('role', 'group');
+    nav.setAttribute('aria-label', track.classList.contains('cards') ? 'Serviços' : 'Projetos');
+    const mark = () => {
+      const c = track.getBoundingClientRect(), mid = c.left + c.width / 2;
+      let best = 0, d = Infinity;
+      items.forEach((it, n) => { const r = it.getBoundingClientRect(), dd = Math.abs(r.left + r.width / 2 - mid); if (dd < d) { d = dd; best = n; } });
+      if (track.scrollLeft < 4) best = 0;
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) best = items.length - 1;
+      [...nav.children].forEach((b, n) => b.setAttribute('aria-current', n === best));
+    };
+    items.forEach((it, n) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', `Ir para o item ${n + 1} de ${items.length}`);
+      b.addEventListener('click', () => {
+        const left = it.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft - (track.clientWidth - it.offsetWidth) / 2;
+        track.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' });
+      });
+      nav.append(b);
+    });
+    track.after(nav); mark();
+    track.addEventListener('scroll', () => requestAnimationFrame(mark), { passive: true });
+    window.addEventListener('resize', mark);
+  });
 
   // Animação em camadas controlada pelo scroll (renderizador próprio, sem CDN)
   const wrap = document.getElementById('montagem');
