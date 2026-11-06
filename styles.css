@@ -65,10 +65,10 @@
  .plans-swipe-hint{display:flex;justify-content:space-between;align-items:center;margin:24px 7% 0;font-size:12px;color:#c0c8b1}.plans-swipe-hint span{color:var(--volt);font-size:21px}
  .plan-grid{display:flex;gap:16px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:7vw;overscroll-behavior-x:contain;touch-action:pan-x pan-y;margin-top:0;padding:30px 7vw 20px;scrollbar-width:thin;scrollbar-color:#7c9b3d #181d10;align-items:stretch}
  .plan-grid>.plan-card{flex:0 0 min(82vw,350px);width:min(82vw,350px);scroll-snap-align:start;transform:none!important;backdrop-filter:none;transform-style:flat}
- .plan-content,.featured .plan-content{padding:30px 24px 24px;opacity:1!important;transform:none!important}
+ .plan-content,.featured .plan-content{padding:30px 24px 24px;}
  .plan-card h3,.featured h3{font-size:28px}.plan-label{font-size:9px;line-height:1.7;min-height:16px}.plan-description{font-size:14px;min-height:52px}.plan-benefits{gap:15px;margin-block:24px}.plan-benefits li{font-size:13px;line-height:1.75;padding-left:22px}.plan-investment>span{font-size:10px}.plan-investment>strong,.featured .plan-investment>strong{font-size:32px}.plan-investment>p{font-size:11px}.plan-button{font-size:14px;min-height:48px}.featured-badge{font-size:9px;top:-15px}
- .confidence-row{margin-top:28px}.plan-fineprint{margin-top:24px;font-size:10px}.plan-grain{opacity:.12}.featured:after{animation:none}.plans-aura{filter:none;opacity:.5}
- .glass,.mobile-sticky{backdrop-filter:none}.grain{display:none}.hero-spotlight{filter:none}.founder-photo{filter:none}.portrait-scroll{filter:none!important;will-change:auto}.portrait-mouse{will-change:auto}.hero-next{animation:none}.scroll-cue i{animation:none}.custom-cursor{display:none}
+ .confidence-row{margin-top:28px}.plan-fineprint{margin-top:24px;font-size:10px}.plan-grain{opacity:.12}.featured:after{animation:edgeOrbit 15s linear infinite}.plans-aura{filter:none;opacity:.5}
+ .glass,.mobile-sticky{backdrop-filter:none}.grain{display:none}.hero-spotlight{filter:none}.founder-photo{filter:none}.portrait-scroll{will-change:transform}.portrait-mouse{will-change:auto}.custom-cursor{display:none}
  .case-pillars p,.position-pillars p,.comparison-card li{font-size:13px}.about-top .mono-tag,.case-section-end{font-size:8px}.comparison-heading .mono-tag{display:none}.footer-bottom{font-size:10px}.footer-bottom>span:last-child{font-size:8px}
  .mobile-sticky>span{font-size:8px}.mobile-sticky>.button{font-size:12px;min-height:46px}.whatsapp-float{display:none}
  .viewer-toolbar{min-height:64px;gap:10px;padding-inline:12px}#viewer-close{font-size:12px;padding-inline:13px}.viewer-toolbar>strong{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.viewer-brand{display:none}
@@ -78,7 +78,34 @@
 @media(max-width:800px){
  .plan-content>.plan-label{order:0}.plan-content>h3{order:1}.plan-content>.plan-description{order:2;min-height:52px}.plan-content>.plan-investment{order:3;margin-top:22px;padding-top:20px}.plan-content>.plan-button{order:4}.plan-content>.plan-details{order:5;display:block;margin-top:22px;border-top:1px solid #ffffff1c;padding-top:16px}
  .plan-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;min-height:44px;cursor:pointer;list-style:none;color:#d3dbc5}.plan-details>summary::-webkit-details-marker{display:none}.plan-details>summary span{color:var(--volt);font-size:22px}.plan-details[open]>summary span{rotate:45deg}.plan-details .plan-benefits{margin:18px 0 0}
- .plan-card:before{display:none}.featured{box-shadow:none}.halftone{opacity:.1}.hero-studio{font-size:7px}.hero-bottom{font-size:8px}.hero-bottom strong{font-size:9px}.hero-bottom>a{font-size:8px}
+ .plan-card:before{opacity:.7}.featured{box-shadow:none}.halftone{opacity:.1}.hero-studio{font-size:7px}.hero-bottom{font-size:8px}.hero-bottom strong{font-size:9px}.hero-bottom>a{font-size:8px}
 }
 
 .project-card>picture{display:contents}
+
+/* Mobile retains the full motion direction while controls remain below the 3D stage. */
+@media(max-width:800px){
+ .gallery-ready .gallery-stage{height:calc(clamp(225px,67vw,320px) * 1.33334 + 105px);perspective:1000px;perspective-origin:50% 38%;overflow:hidden}
+ .gallery-ready .project-card{width:clamp(225px,67vw,320px);top:24px}
+ .gallery-ready .gallery-controls{margin-top:12px}
+ .featured{box-shadow:0 0 35px #a7ef1814}.plans-aura{opacity:1}
+ .plan-grid{align-items:flex-start;overflow-anchor:none}
+ .plan-grid>.plan-card{height:auto;align-self:flex-start;overflow-anchor:none}
+ .plan-content,.featured .plan-content{height:auto;min-height:0;overflow-anchor:none}
+ .plan-content>*{flex-shrink:0}
+ .plan-details{overflow-anchor:none}.plan-details .plan-benefits{flex:none}
+ .plan-details[open] .plan-benefits{animation:benefitsReveal .4s var(--ease) both}
+ .plan-details>summary{touch-action:manipulation;scroll-margin-block:100px}
+ .plan-details>summary span{transition:rotate .3s var(--ease)}
+ .plan-details .plan-benefits li{overflow-wrap:anywhere}
+ .gallery-ready .project-tag{font-size:8px}.gallery-ready .project-bottom small{font-size:7px}.gallery-ready .project-visit{font-size:10px}
+}
+@keyframes benefitsReveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Expansion must not let the browser anchor to the footer and jump past the chosen plan. */
+html{overflow-anchor:none}
+@media(max-width:800px){
+ .plan-grid{scroll-snap-type:x proximity}
+ .plan-details .plan-benefits{max-height:none;overflow:visible;padding-bottom:8px}
+ .plan-details[open]{padding-bottom:6px}
+}

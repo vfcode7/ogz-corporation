@@ -4,14 +4,14 @@ export function createCarousel({region,sites,reduced=false,track=()=>{}}){
   const prev=region.querySelector('#gallery-prev'),next=region.querySelector('#gallery-next');
   const counter=region.querySelector('#gallery-current'),progress=region.querySelector('.gallery-progress i'),status=region.querySelector('#gallery-status');
   const last=cards.length-1,clamp=value=>Math.min(last,Math.max(0,value));
-  let pos=innerWidth<=800?0:Math.min(2,last),target=pos,visible=true,gap=0,active=-1,dirty=true,settled=false;
+  let pos=Math.min(2,last),target=pos,visible=true,gap=0,active=-1,dirty=true,settled=false;
   let down=false,dragging=false,pointerId=null,originX=0,originY=0,startPos=pos,lastX=0,lastAt=0,velocity=0,suppressClickUntil=0,lastPointerAt=-1000,wheelTimer;
   const elastic=value=>value<0?-Math.min(.3,-value*.22):value>last?last+Math.min(.3,(value-last)*.22):value;
   const rail=region.querySelector('.gallery-cards');
-  const nativeQuery=matchMedia('(max-width: 800px)');
+  const nativeQuery=matchMedia('(max-width: 0px)');
   let native=nativeQuery.matches;
   function nativeIndex(){return clamp(Math.round((rail.scrollLeft)/(cards[0].offsetWidth+16)))}
-  function resize(){native=nativeQuery.matches;region.classList.toggle('gallery-native',native);gap=innerWidth*.21;dirty=true;if(native)requestAnimationFrame(()=>{rail.scrollTo({left:Math.round(target)*(cards[0].offsetWidth+16),behavior:'instant'});pos=target;render()})}
+  function resize(){native=nativeQuery.matches;region.classList.toggle('gallery-native',native);gap=innerWidth*(innerWidth<=800?.67:.21);dirty=true;if(native)requestAnimationFrame(()=>{rail.scrollTo({left:Math.round(target)*(cards[0].offsetWidth+16),behavior:'instant'});pos=target;render()})}
   rail.addEventListener('scroll',()=>{if(!native)return;pos=target=nativeIndex();render();prev.disabled=target<=0;next.disabled=target>=last;clearTimeout(wheelTimer);wheelTimer=setTimeout(announce,160)},{passive:true});
   function setTarget(value){target=clamp(Math.round(value));if(native){rail.scrollTo({left:target*(cards[0].offsetWidth+16),behavior:reduced?'instant':'smooth'})}settled=false;dirty=true;prev.disabled=target<=0;next.disabled=target>=last}
   function announce(){const index=clamp(Math.round(pos));status.textContent=`Projeto ${index+1} de ${cards.length}: ${sites[index].name}. Abra o projeto e use Voltar ao portfólio para retornar.`}

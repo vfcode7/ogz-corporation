@@ -52,8 +52,10 @@ Fontes e bibliotecas são carregadas por CDN. Meta de Lighthouse não significa 
 
 ## Revisão de UX mobile
 
-- Até 800px, os projetos usam rolagem nativa com snap, com setas de 48px em uma faixa separada abaixo dos cards. Desktop mantém a galeria em perspectiva.
+- Mobile e desktop usam a galeria 3D animada, com estágio dimensionado para manter as setas de 48px abaixo dos cards.
 - Os projetos abrem em um dialog com iframe carregado sob demanda. “Voltar ao portfólio” fecha a prévia, descarrega o projeto e restaura foco e posição de rolagem. Voltar do navegador também fecha a prévia.
 - Os planos ficam lado a lado em uma faixa horizontal no celular. Preço e CTA vêm antes dos benefícios, que podem ser expandidos por plano. Desktop mantém os três planos visíveis.
-- Mobile usa rolagem da página nativa, sem Lenis, ticker próprio, parallax contínuo ou animações de ScrollTrigger. Blur de vidro e borda animada são desligados nesse breakpoint.
+- Mobile mantém rolagem de página nativa e imagens menores, com entrada tipográfica, retrato flutuante, parallax na rolagem, manifesto animado, revelações, galeria 3D e borda animada. A preferência do sistema por movimento reduzido é respeitada.
 - O retrato mobile tem 600px de largura e 44.592 bytes, selecionado por srcset; a imagem original WebP tem 868.708 bytes. Isso reduz o arquivo do retrato em cerca de 95%; não equivale a uma medição de Lighthouse ou de tempo total de carga.
+
+A expansão dos benefícios mantém o scroll da página e do carrossel, sem esticar os outros planos. A lista cresce no fluxo normal da página, sem recortes ou rolagem interna; o botão muda para “Ocultar benefícios”.

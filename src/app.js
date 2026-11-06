@@ -52,22 +52,22 @@ if(fine&&!reduced){
 }
 
 function tick(time){lenis?.raf(time*1000);const delta=lastTime?Math.min(time-lastTime,.06):.016;lastTime=time;if(!document.hidden){gallery.tick(delta);if(fine&&!reduced){cursorX+=(pointerX-cursorX)*.18;cursorY+=(pointerY-cursorY)*.18;cursor.style.transform=`translate3d(${cursorX-(cursorMode?40.5:4)}px,${cursorY-(cursorMode?17.5:4)}px,0)`}}}
-let fallbackFrame;const tickerLayout=matchMedia('(min-width: 801px)');
+let fallbackFrame;const tickerLayout=matchMedia('(min-width: 0px)');
 function syncTicker(){if(gsap){gsap.ticker.remove(tick);if(tickerLayout.matches){gsap.ticker.add(tick);gsap.ticker.lagSmoothing(0)}}else{if(fallbackFrame)cancelAnimationFrame(fallbackFrame);fallbackFrame=null;if(tickerLayout.matches){const frame=now=>{tick(now/1000);fallbackFrame=requestAnimationFrame(frame)};fallbackFrame=requestAnimationFrame(frame)}}}
 syncTicker();tickerLayout.addEventListener('change',syncTicker);
 
-if(gsap&&ST&&!reduced&&!mobile){
+if(gsap&&ST&&!reduced){
   gsap.to('.type-exit',{scale:1.15,opacity:0,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom 12%',scrub:1}});
-  gsap.to('.portrait-scroll',{yPercent:-8,filter:'brightness(.38)',ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+  gsap.to('.portrait-scroll',{yPercent:-8,filter:mobile?'brightness(.72)':'brightness(.38)',ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
   const manifesto=$('#manifesto'),text=manifesto.textContent;manifesto.setAttribute('aria-label',text);manifesto.replaceChildren(...text.split(/\s+/).flatMap((word,index)=>{const span=document.createElement('span');span.className='word';span.textContent=word;span.setAttribute('aria-hidden','true');return [document.createTextNode(index?' ':''),span]}));
   gsap.fromTo('.manifesto .word',{color:'#52554b'},{color:'#f4ecdc',stagger:.08,ease:'none',scrollTrigger:{trigger:'.about-grid',start:'top 85%',end:'bottom 30%',scrub:1}});
   $$('.cases-heading,.case-pillars article,.about h2,.comparison-card,.position-pillars article,.plans-heading').forEach(el=>gsap.from(el,{opacity:0,y:25,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%',once:true}}));
   // Keep transforms on pricing shells reserved for hover tilt; reveal their inner content instead.
-  $$('.plan-content').forEach((el,index)=>gsap.from(el,{opacity:0,y:22,duration:.95,delay:index*.08,ease:'power3.out',scrollTrigger:{trigger:'.plan-grid',start:'top 88%',once:true}}));
+  $$('.plan-content').forEach((el,index)=>gsap.from(el,{opacity:0,y:30,duration:1,delay:index*.08,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 94%',once:true}}));
 }
-if(gsap&&!reduced&&!mobile){
+if(gsap&&!reduced){
   if(fine){const hero=$('.hero'),photoX=gsap.quickTo('.portrait-mouse','x',{duration:1.1,ease:'power3.out'}),photoY=gsap.quickTo('.portrait-mouse','y',{duration:1.1,ease:'power3.out'});const types=$$('.type-parallax').map(el=>({x:gsap.quickTo(el,'x',{duration:1.2,ease:'power3.out'}),y:gsap.quickTo(el,'y',{duration:1.2,ease:'power3.out'})}));hero.addEventListener('pointermove',event=>{const r=hero.getBoundingClientRect(),x=(event.clientX-r.left)/r.width-.5,y=(event.clientY-r.top)/r.height-.5;photoX(x*20);photoY(y*20);types.forEach(to=>{to.x(-x*44);to.y(-y*22)})});hero.addEventListener('pointerleave',()=>{photoX(0);photoY(0);types.forEach(to=>{to.x(0);to.y(0)})})}
-  else gsap.to('.portrait-mouse',{x:4,y:2,duration:6,repeat:-1,yoyo:true,ease:'sine.inOut'});
+  else {const float=gsap.to('.portrait-mouse',{x:7,y:4,duration:4.5,repeat:-1,yoyo:true,ease:'sine.inOut'});new IntersectionObserver(entries=>float.paused(!entries[0].isIntersecting)).observe($('.hero'))}
 }
 if(CONFIG.stats&&gsap&&!reduced){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;observer.unobserve(entry.target);const counter={value:0},el=entry.target;gsap.to(counter,{value:Number(el.dataset.count),duration:2,ease:'expo.out',onUpdate:()=>el.textContent=Math.round(counter.value).toLocaleString('pt-BR')})}),{threshold:.8});$$('[data-count]').forEach(el=>observer.observe(el))}
 setTimeout(()=>$('.whatsapp-float').classList.add('show'),reduced?0:3000);
@@ -75,7 +75,7 @@ setTimeout(()=>$('.whatsapp-float').classList.add('show'),reduced?0:3000);
 // Short, bounded loading state: portrait and webfonts decode before the editorial entrance.
 const loader=$('#preloader');let loaded=false;
 if(!reduced&&!mobile){loader.hidden=false;document.body.style.overflow='hidden';lenis?.stop();document.body.setAttribute('aria-busy','true')}
-function enter(){if(loaded)return;loaded=true;fitTypography();document.body.style.overflow='';document.body.removeAttribute('aria-busy');lenis?.start();loader.classList.add('leaving');setTimeout(()=>loader.hidden=true,reduced?0:650);if(gsap&&!reduced&&!mobile){const photo=$('#founder-photo'),baseFilter=getComputedStyle(photo).filter;gsap.timeline({defaults:{ease:'power3.out'}}).from('.hero-spotlight',{opacity:0,duration:1.1}).fromTo('.type-back .hero-word',{clipPath:'inset(100% -20% 0 -20%)'},{clipPath:'inset(-25% -20% -25% -20%)',duration:1.1,stagger:.1},.05).from('.type-back .hero-letter',{yPercent:115,opacity:0,stagger:.04,duration:.95},.05).fromTo(photo,{opacity:0,scale:1.06,filter:`${baseFilter} blur(10px)`},{opacity:1,scale:1,filter:`${baseFilter} blur(0px)`,duration:1.3},.35).from('.type-front',{opacity:0,duration:.8},1).from('.hero-header,.hero-bottom,.hero-index,.scroll-cue',{opacity:0,y:8,duration:.8,stagger:.06},.8)}ST?.refresh();ST?.update();if(initialHash&&initialHash===location.hash){const destination=$(initialHash);if(destination){if(lenis)lenis.scrollTo(destination,{immediate:true});else destination.scrollIntoView({behavior:'instant'})}}requestAnimationFrame(()=>{ST?.refresh();ST?.update()})}
+function enter(){if(loaded)return;loaded=true;fitTypography();document.body.style.overflow='';document.body.removeAttribute('aria-busy');lenis?.start();loader.classList.add('leaving');setTimeout(()=>loader.hidden=true,reduced?0:650);if(gsap&&!reduced){const photo=$('#founder-photo'),baseFilter=getComputedStyle(photo).filter.replace(/^none$/,'');gsap.timeline({defaults:{ease:'power3.out'}}).from('.hero-spotlight',{opacity:0,duration:1.1}).fromTo('.type-back .hero-word',{clipPath:'inset(100% -20% 0 -20%)'},{clipPath:'inset(-25% -20% -25% -20%)',duration:1.1,stagger:.1},.05).from('.type-back .hero-letter',{yPercent:115,opacity:0,stagger:.04,duration:.95},.05).fromTo(photo,{opacity:0,scale:1.06,filter:`${baseFilter} blur(10px)`},{opacity:1,scale:1,filter:`${baseFilter} blur(0px)`,duration:1.3},.35).from('.type-front',{opacity:0,duration:.8},1).from('.hero-header,.hero-bottom,.hero-index,.scroll-cue',{opacity:0,y:8,duration:.8,stagger:.06},.8)}ST?.refresh();ST?.update();if(initialHash&&initialHash===location.hash){const destination=$(initialHash);if(destination){if(lenis)lenis.scrollTo(destination,{immediate:true});else destination.scrollIntoView({behavior:'instant'})}}requestAnimationFrame(()=>{ST?.refresh();ST?.update()})}
 const timeout=setTimeout(enter,3500);
 Promise.all([document.fonts?.ready||Promise.resolve(),$('#founder-photo').decode().catch(()=>null)]).finally(()=>{clearTimeout(timeout);enter()});
 $('#founder-photo').addEventListener('error',()=>{if(!$('#founder-photo').src.endsWith('ogz-fundador.png'))$('#founder-photo').src='./assets/ogz-fundador.png'});
@@ -92,3 +92,16 @@ initProjectViewer({onOpen:()=>lenis?.stop(),onClose:()=>lenis?.start()});
 const planLayout=matchMedia('(max-width: 800px)');
 function updatePlanDetails(){ $$('.plan-details').forEach(detail=>detail.open=!planLayout.matches) }
 updatePlanDetails();planLayout.addEventListener('change',updatePlanDetails);
+
+// Native details remain accessible; prevent scroll anchoring and keep each toggle in place.
+$$('.plan-details').forEach(detail=>{
+ const summary=$('summary',detail);
+ summary.addEventListener('click',event=>{
+  if(!planLayout.matches)return;
+  event.preventDefault();const pageY=window.scrollY,rail=$('.plan-grid'),railX=rail.scrollLeft;
+  detail.open=!detail.open;
+  if(detail.open)$('.plan-benefits',detail).scrollTop=0;
+  summary.firstChild.textContent=detail.open?'Ocultar benefícios ':'Ver tudo que está incluído ';
+  requestAnimationFrame(()=>{rail.scrollLeft=railX;window.scrollTo({top:pageY,behavior:'instant'});ST?.refresh()});
+ });
+});
