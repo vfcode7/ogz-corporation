@@ -2,7 +2,7 @@
    HERO — pin + scrub da sequência, legendas por beat e canvas de brasas
    ===================================================================== */
 import { HERO } from './config.js';
-import { FrameSequence, mapProgress } from './frames.js';
+import { FrameSequence, mapProgress } from './frames.js?v=layout-7';
 
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clamp = (v, a, b) => Math.min(Math.max(v, a), b);

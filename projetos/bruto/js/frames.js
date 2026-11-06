@@ -22,6 +22,9 @@ export class FrameSequence {
     this.width = 0;
     this.height = 0;
     this._raf = null;
+    this._desktop = matchMedia('(min-width: 861px)');
+    this._foreground = document.createElement('canvas');
+    this._resizeObserver = new ResizeObserver(() => this.resize());
     this._onResize = () => this.resize();
   }
 
@@ -95,11 +98,58 @@ export class FrameSequence {
     const r = this.canvas.getBoundingClientRect();
     if (!r.width) return;
     const ctx = this.ctx;
-    // cover-fit
-    const scale = Math.max(r.width / img.naturalWidth, r.height / img.naturalHeight);
+    // No desktop, o palco é horizontal. Mantém todos os ingredientes visíveis
+    // em primeiro plano, sem esticar ou recortar a sequência vertical original.
+    const desktop = this._desktop.matches;
+    const scale = desktop
+      ? Math.min(r.width * .66 / img.naturalWidth, r.height / img.naturalHeight)
+      : Math.max(r.width / img.naturalWidth, r.height / img.naturalHeight);
     const w = img.naturalWidth * scale, h = img.naturalHeight * scale;
     ctx.clearRect(0, 0, r.width, r.height);
-    ctx.drawImage(img, (r.width - w) / 2, (r.height - h) / 2, w, h);
+    if (desktop) {
+      // A própria cena preenche a largura como ambiente, atrás do produto.
+      const bgScale = Math.max(r.width / img.naturalWidth, r.height / img.naturalHeight);
+      const bw = img.naturalWidth * bgScale, bh = img.naturalHeight * bgScale;
+      ctx.save();
+      ctx.globalAlpha = .16;
+      ctx.drawImage(img, (r.width - bw) / 2, (r.height - bh) / 2, bw, bh);
+      ctx.restore();
+      const fade = ctx.createLinearGradient(0, 0, r.width, 0);
+      fade.addColorStop(0, '#140D0B');
+      fade.addColorStop(.5, 'rgba(20,13,11,.75)');
+      fade.addColorStop(1, 'rgba(20,13,11,.3)');
+      ctx.fillStyle = fade;
+      ctx.fillRect(0, 0, r.width, r.height);
+      // Funde as bordas do material original com o ambiente horizontal.
+      const layer = this._foreground;
+      if (layer.width !== img.naturalWidth || layer.height !== img.naturalHeight) {
+        layer.width = img.naturalWidth;
+        layer.height = img.naturalHeight;
+      }
+      const fg = layer.getContext('2d');
+      fg.clearRect(0, 0, layer.width, layer.height);
+      fg.globalCompositeOperation = 'source-over';
+      fg.drawImage(img, 0, 0);
+      fg.globalCompositeOperation = 'destination-in';
+      const sides = fg.createLinearGradient(0, 0, layer.width, 0);
+      sides.addColorStop(0, 'transparent');
+      sides.addColorStop(.18, '#000');
+      sides.addColorStop(.82, '#000');
+      sides.addColorStop(1, 'transparent');
+      fg.fillStyle = sides;
+      fg.fillRect(0, 0, layer.width, layer.height);
+      const edges = fg.createLinearGradient(0, 0, 0, layer.height);
+      edges.addColorStop(0, 'transparent');
+      edges.addColorStop(.1, '#000');
+      edges.addColorStop(.88, '#000');
+      edges.addColorStop(1, 'transparent');
+      fg.fillStyle = edges;
+      fg.fillRect(0, 0, layer.width, layer.height);
+      fg.globalCompositeOperation = 'source-over';
+      ctx.drawImage(layer, r.width * .64 - w / 2, (r.height - h) / 2, w, h);
+    } else {
+      ctx.drawImage(img, (r.width - w) / 2, (r.height - h) / 2, w, h);
+    }
     if (force) this._last = -1;
   }
 
@@ -113,6 +163,7 @@ export class FrameSequence {
 
   start() {
     this.resize();
+    this._resizeObserver.observe(this.canvas);
     window.addEventListener('resize', this._onResize, { passive: true });
     if (!this._raf) this._raf = requestAnimationFrame(this.tick);
   }
@@ -120,6 +171,7 @@ export class FrameSequence {
   stop() {
     if (this._raf) cancelAnimationFrame(this._raf);
     this._raf = null;
+    this._resizeObserver.disconnect();
     window.removeEventListener('resize', this._onResize);
   }
 

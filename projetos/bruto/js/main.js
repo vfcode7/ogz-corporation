@@ -1,8 +1,8 @@
 /* =====================================================================
    BOOT — Lenis + GSAP, preloader, hero e o resto da interface
    ===================================================================== */
-import { initHero } from './hero.js';
-import { initUI } from './ui.js';
+import { initHero } from './hero.js?v=layout-7';
+import { initUI } from './ui.js?v=layout-7';
 import { initCart } from './cart.js';
 
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -39,7 +39,10 @@ function progresso(p) {
   barra.style.width = v + '%';
   pct.textContent = v + '%';
 }
+let preloaderClosed = false;
 function fecharPreloader() {
+  if (preloaderClosed) return;
+  preloaderClosed = true;
   progresso(1);
   gsap.timeline()
     .to('#pl-box', { opacity: 0, y: -14, duration: .3 })

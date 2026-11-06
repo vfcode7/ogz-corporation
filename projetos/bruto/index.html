@@ -92,7 +92,7 @@ tailwind.config = {
   }
 }
 </script>
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=layout-7">
 </head>
 
 <body class="bg-char-950 font-sans text-cream-50 antialiased">
@@ -256,7 +256,19 @@ tailwind.config = {
     </div>
 
     <div id="tabs" class="mt-10 flex flex-wrap gap-2" role="tablist" aria-label="Categorias do cardápio"></div>
-    <div id="grid" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+    <div id="grid" class="menu-grid" role="tabpanel" aria-labelledby="tab-todos"></div>
+    <div class="menu-pagination" role="group" aria-label="Navegação dos produtos">
+      <p id="menu-count" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="menu-arrows">
+        <button type="button" id="menu-prev" class="menu-arrow" aria-label="Ver 4 produtos anteriores" aria-controls="grid" disabled>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+        </button>
+        <span id="menu-page" class="menu-page">1 / 1</span>
+        <button type="button" id="menu-next" class="menu-arrow" aria-label="Ver próximos 4 produtos" aria-controls="grid" disabled>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -268,73 +280,44 @@ tailwind.config = {
       Combo fechado <span class="text-ketchup-600">sai mais barato.</span>
     </h2>
 
-    <div class="mt-12 grid gap-6 md:grid-cols-2">
-      <article class="combo-card bg-char-900 text-cream-50" data-reveal>
-        <img src="assets/img/burger-combo.webp" width="960" height="782" loading="lazy" class="combo-img"
-             alt="Hambúrguer artesanal com cheddar derretido sobre as chamas da chapa">
-        <div class="combo-body">
-          <p class="font-marker text-[15px] text-fire-400">o preferido da casa</p>
-          <h3 class="mt-2 font-display text-[28px] uppercase leading-none">Combo Bruto</h3>
-          <p class="mt-3 text-[14px] leading-relaxed text-cream-50/70">Bruto Clássico + fritas rústicas + refri lata gelado.</p>
-          <div class="mt-6 flex items-center gap-4">
-            <span class="font-display text-[30px] text-fire-400">R$ 49,90</span>
-            <button class="btn-primary" data-add="combo-bruto">Montar meu combo</button>
+    <div class="combo-grid">
+      <div class="combo-shell" data-reveal>
+        <article class="combo-card bg-char-900 text-cream-50">
+          <div class="combo-media">
+            <img src="https://images.pexels.com/photos/19247580/pexels-photo-19247580.jpeg?auto=compress&cs=tinysrgb&w=700&h=440&fit=crop"
+                 width="700" height="440" loading="lazy" class="combo-img"
+                 onerror="this.onerror=null;this.src='assets/img/menu/combo-bruto.svg';this.classList.add('combo-img--pad')"
+                 alt="Combo Bruto com hambúrguer, fritas e bebida">
           </div>
-        </div>
-      </article>
-
-      <article class="combo-card bg-cream-50 text-char-900" data-reveal>
-        <img src="https://images.pexels.com/photos/2340204/pexels-photo-2340204.jpeg?auto=compress&cs=tinysrgb&w=960&h=600&fit=crop"
-             width="960" height="600" loading="lazy" class="combo-img"
-             onerror="this.onerror=null;this.src='assets/img/menu/combo-duplo.svg';this.classList.add('combo-img--pad')"
-             alt="Dois hambúrgueres com milkshakes, anéis de cebola e batata rústica sobre mesa de madeira">
-        <div class="combo-body">
-          <p class="font-marker text-[15px] text-ketchup-500">pra dividir (ou não)</p>
-          <h3 class="mt-2 font-display text-[28px] uppercase leading-none">Combo Duplo Fogo</h3>
-          <p class="mt-3 text-[14px] leading-relaxed text-char-900/65">Dois blends de 180g, fritas grandes e duas bebidas.</p>
-          <div class="mt-6 flex items-center gap-4">
-            <span class="font-display text-[30px] text-ketchup-500">R$ 79,90</span>
-            <button class="btn-primary" data-add="combo-duplo">Montar meu combo</button>
+          <div class="combo-body">
+            <p class="combo-eyebrow font-marker text-fire-400">o preferido da casa</p>
+            <h3 class="font-display">Combo Bruto</h3>
+            <p class="combo-description">Bruto Clássico + fritas rústicas + refri lata gelado.</p>
+            <div class="combo-footer">
+              <span class="combo-price font-display text-fire-400">R$ 49,90</span>
+              <button type="button" class="btn-primary" data-add="combo-bruto" aria-label="Adicionar Combo Bruto à sacola">Quero esse combo</button>
+            </div>
           </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 5. POR QUE SOMOS DIFERENTES ============ -->
-<section id="porque" class="bg-cream-100 py-20 text-char-900 md:py-28">
-  <div class="mx-auto grid max-w-[1240px] items-center gap-14 px-5 md:grid-cols-2">
-    <div class="order-2 md:order-1">
-      <img id="float-burger" src="assets/img/burger-montado.webp" width="600" height="750" loading="lazy"
-           class="mx-auto w-full max-w-[460px] rounded-card"
-           alt="Hambúrguer BRUTO montado, com blend, cheddar, bacon, alface, tomate e cebola roxa">
-    </div>
-    <div class="order-1 md:order-2">
-      <h2 class="font-display text-[clamp(2rem,4.6vw,3.4rem)] uppercase leading-[0.9]" data-reveal>
-        Fresh, hot &amp; feito<br>pra <span class="text-ketchup-500">devorar</span>
-      </h2>
-      <div class="mt-10 grid gap-8 sm:grid-cols-2">
-        <div class="feature" data-reveal>
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-          <h3>Ingredientes frescos</h3>
-          <p>Hortifruti recebido todo dia de manhã. Nada congelado na montagem.</p>
-        </div>
-        <div class="feature" data-reveal>
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/></svg>
-          <h3>Pão artesanal</h3>
-          <p>Brioche assado por uma padaria do bairro e tostado na manteiga.</p>
-        </div>
-        <div class="feature" data-reveal>
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5Z"/></svg>
-          <h3>Carne no ponto</h3>
-          <p>Blend 180g de acém com costela, selado na chapa a 230°C.</p>
-        </div>
-        <div class="feature" data-reveal>
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
-          <h3>Entrega rápida</h3>
-          <p>Raio de 6 km, embalagem que respira e média de 32 minutos.</p>
-        </div>
+        </article>
+      </div>
+      <div class="combo-shell" data-reveal>
+        <article class="combo-card bg-cream-50 text-char-900">
+          <div class="combo-media">
+            <img src="https://images.pexels.com/photos/18713430/pexels-photo-18713430.jpeg?auto=compress&cs=tinysrgb&w=700&h=440&fit=crop"
+                 width="700" height="440" loading="lazy" class="combo-img"
+                 onerror="this.onerror=null;this.src='assets/img/menu/combo-duplo.svg';this.classList.add('combo-img--pad')"
+                 alt="Combo Duplo Fogo com hambúrgueres, fritas e bebidas">
+          </div>
+          <div class="combo-body">
+            <p class="combo-eyebrow font-marker text-ketchup-500">pra dividir (ou não)</p>
+            <h3 class="font-display">Combo Duplo Fogo</h3>
+            <p class="combo-description">Dois Duplo Fogo, fritas grandes e duas bebidas geladas.</p>
+            <div class="combo-footer">
+              <span class="combo-price font-display text-ketchup-500">R$ 79,90</span>
+              <button type="button" class="btn-primary" data-add="combo-duplo" aria-label="Adicionar Combo Duplo Fogo à sacola">Quero esse combo</button>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
@@ -426,7 +409,7 @@ tailwind.config = {
 </section>
 
 <!-- ============ 9. CTA FINAL ============ -->
-<section class="relative overflow-hidden bg-fire-400 py-20 text-char-950 md:py-24">
+<section id="pedido-final" class="relative overflow-hidden bg-fire-400 py-20 text-char-950 md:py-24">
   <div class="mx-auto grid max-w-[1240px] items-center gap-8 px-5 md:grid-cols-[1.2fr_1fr]">
     <div>
       <h2 class="font-display text-[clamp(2.6rem,7vw,5.4rem)] uppercase leading-[0.86]" data-reveal>
@@ -549,6 +532,6 @@ tailwind.config = {
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
-<script type="module" src="js/main.js"></script>
+<script type="module" src="js/main.js?v=layout-7"></script>
 </body>
 </html>

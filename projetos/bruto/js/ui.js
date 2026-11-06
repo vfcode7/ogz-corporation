@@ -4,7 +4,7 @@
 import { BRAND, HORARIOS, CATEGORIAS, MENU, BRL } from './config.js';
 
 const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
+const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 const lerp = (a, b, t) => a + (b - a) * t;
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TOUCH = matchMedia('(hover: none), (pointer: coarse)').matches;
@@ -42,7 +42,7 @@ function tilt(card) {
     st.rx = lerp(st.rx, st.tx, .14);
     st.ry = lerp(st.ry, st.ty, .14);
     card.style.transform = `perspective(900px) rotateX(${st.rx.toFixed(2)}deg) rotateY(${st.ry.toFixed(2)}deg)`;
-    if (vivo || Math.abs(st.rx - st.tx) > .01) raf = requestAnimationFrame(tick);
+    if (vivo || Math.abs(st.rx - st.tx) > .01 || Math.abs(st.ry - st.ty) > .01) raf = requestAnimationFrame(tick);
     else { raf = null; card.style.transform = ''; }
   };
   const start = () => { if (!raf) raf = requestAnimationFrame(tick); };
@@ -56,30 +56,69 @@ function tilt(card) {
   card.addEventListener('mouseleave', () => { vivo = false; st.tx = st.ty = 0; start(); });
 }
 
-function renderGrid(cat) {
+const MENU_PAGE_SIZE = 4;
+let menuCategory = 'todos';
+let menuPage = 0;
+
+function renderGrid() {
   const grid = $('#grid');
-  const lista = cat === 'todos' ? MENU : MENU.filter(m => m.cat === cat);
-  grid.innerHTML = lista.map(cardHTML).join('');
+  const lista = menuCategory === 'todos' ? MENU : MENU.filter(m => m.cat === menuCategory);
+  const pages = Math.max(1, Math.ceil(lista.length / MENU_PAGE_SIZE));
+  menuPage = Math.max(0, Math.min(menuPage, pages - 1));
+  const start = menuPage * MENU_PAGE_SIZE;
+
+  // Cancela efeitos antigos antes de remover os cards; a visibilidade dos novos
+  // produtos não depende do estado de uma animação de rolagem.
+  gsap.killTweensOf($$('.dish', grid));
+  grid.innerHTML = lista.slice(start, start + MENU_PAGE_SIZE).map(cardHTML).join('');
   $$('.dish', grid).forEach(tilt);
-  if (!REDUCED) {
-    gsap.fromTo($$('#grid .dish'),
-      { y: 26, opacity: 0 },
-      { y: 0, opacity: 1, duration: .55, stagger: .06, ease: 'power3.out', overwrite: true });
-  }
+
+  $('#menu-prev').disabled = menuPage === 0;
+  $('#menu-next').disabled = menuPage === pages - 1;
+  $('#menu-page').textContent = `${menuPage + 1} / ${pages}`;
+  $('#menu-count').textContent = lista.length
+    ? `Mostrando ${start + 1}–${Math.min(start + MENU_PAGE_SIZE, lista.length)} de ${lista.length} produtos`
+    : 'Nenhum produto nesta categoria';
+
+  // O filtro altera a altura do documento. Atualiza o Lenis e os pontos das
+  // seções seguintes para evitar saltos e conteúdo preso com opacidade zero.
+  window.lenis?.resize();
+  ScrollTrigger.refresh();
 }
 
 function initMenu() {
   const tabs = $('#tabs');
   const todas = [{ id: 'todos', label: 'Tudo' }, ...CATEGORIAS];
   tabs.innerHTML = todas.map((c, i) =>
-    `<button class="tab" role="tab" data-cat="${c.id}" aria-selected="${i === 0}">${c.label}</button>`).join('');
+    `<button type="button" id="tab-${c.id}" class="tab" role="tab" data-cat="${c.id}" aria-controls="grid" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${c.label}</button>`).join('');
+  const selectCategory = b => {
+    $$('.tab', tabs).forEach(t => {
+      t.setAttribute('aria-selected', String(t === b));
+      t.tabIndex = t === b ? 0 : -1;
+    });
+    menuCategory = b.dataset.cat;
+    menuPage = 0;
+    $('#grid').setAttribute('aria-labelledby', b.id);
+    renderGrid();
+  };
   tabs.addEventListener('click', e => {
     const b = e.target.closest('.tab');
     if (!b) return;
-    $$('.tab').forEach(t => t.setAttribute('aria-selected', String(t === b)));
-    renderGrid(b.dataset.cat);
+    selectCategory(b);
   });
-  renderGrid('todos');
+  tabs.addEventListener('keydown', e => {
+    const buttons = $$('.tab', tabs);
+    const current = buttons.indexOf(e.target);
+    if (current < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+    e.preventDefault();
+    const index = e.key === 'Home' ? 0 : e.key === 'End' ? buttons.length - 1
+      : (current + (e.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length;
+    buttons[index].focus();
+    selectCategory(buttons[index]);
+  });
+  $('#menu-prev').addEventListener('click', () => { menuPage--; renderGrid(); });
+  $('#menu-next').addEventListener('click', () => { menuPage++; renderGrid(); });
+  renderGrid();
 }
 
 /* --------------------------------------------------------- header */
@@ -160,7 +199,7 @@ function initPointer() {
     el.addEventListener('mouseenter', () => set(txt, sc));
     el.addEventListener('mouseleave', () => set('', 1));
   });
-  bind('.dish-media, .combo-img, #float-burger', 'Ver', 2.1);
+  bind('.dish-media, .combo-img', 'Ver', 2.1);
   bind('a, button', '', 1.6);
 
   if (REDUCED) return;
@@ -191,7 +230,7 @@ function initReveals() {
     });
   });
 
-  $$('[data-count]').forEach(el => {
+  $$('[data-count]:not(#bag-count)').forEach(el => {
     const alvo = parseFloat(el.dataset.count);
     const dec = parseInt(el.dataset.decimals || '0', 10);
     const fmt = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
@@ -216,7 +255,6 @@ function initReveals() {
   }
 
   if (!REDUCED) {
-    gsap.to('#float-burger', { y: -16, duration: 2.6, ease: 'sine.inOut', repeat: -1, yoyo: true });
     gsap.to('#hero-glow', { opacity: .72, scale: 1.08, duration: 2.4, ease: 'sine.inOut', repeat: -1, yoyo: true });
     gsap.to('#burst', {
       rotate: 360, duration: 48, ease: 'none', repeat: -1, transformOrigin: '50% 50%'
@@ -291,6 +329,7 @@ function initSwiper() {
 export function initUI() {
   initLinks();
   initMenu();
+  $$('.combo-card').forEach(tilt);
   initHeader();
   initMarquee();
   initBurst();
