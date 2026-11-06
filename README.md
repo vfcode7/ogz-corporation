@@ -48,3 +48,12 @@ Prompt final utilizado:
 Os botões de plano abrem uma mensagem específica no WhatsApp para revisão e envio pelo visitante. Não existe envio automático. `window.dataLayer` prepara somente `card_click`, `plan_click` e `whatsapp_click`, sem instalar ferramentas de rastreamento ou coletar dados de formulário. Pixel e Analytics descritos nos planos são entregáveis do serviço; IDs e acessos do cliente devem ser fornecidos na contratação.
 
 Fontes e bibliotecas são carregadas por CDN. Meta de Lighthouse não significa uma pontuação já medida ou garantida; conteúdo e hospedagem influenciam o resultado. O endpoint `/__capture/` do servidor local existe apenas para salvar previews de desenvolvimento, limita os nomes dos arquivos e não é necessário para a publicação estática.
+
+
+## Revisão de UX mobile
+
+- Até 800px, os projetos usam rolagem nativa com snap, com setas de 48px em uma faixa separada abaixo dos cards. Desktop mantém a galeria em perspectiva.
+- Os projetos abrem em um dialog com iframe carregado sob demanda. “Voltar ao portfólio” fecha a prévia, descarrega o projeto e restaura foco e posição de rolagem. Voltar do navegador também fecha a prévia.
+- Os planos ficam lado a lado em uma faixa horizontal no celular. Preço e CTA vêm antes dos benefícios, que podem ser expandidos por plano. Desktop mantém os três planos visíveis.
+- Mobile usa rolagem da página nativa, sem Lenis, ticker próprio, parallax contínuo ou animações de ScrollTrigger. Blur de vidro e borda animada são desligados nesse breakpoint.
+- O retrato mobile tem 600px de largura e 44.592 bytes, selecionado por srcset; a imagem original WebP tem 868.708 bytes. Isso reduz o arquivo do retrato em cerca de 95%; não equivale a uma medição de Lighthouse ou de tempo total de carga.
