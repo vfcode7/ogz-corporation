@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="42%" r="68%">
+    <stop offset="0" stop-color="#261C1A"/><stop offset="1" stop-color="#1E1512"/>
+  </radialGradient>
+  <radialGradient id="glow" cx="50%" cy="54%" r="46%">
+    <stop offset="0" stop-color="#FF7A1A" stop-opacity=".55"/>
+    <stop offset="1" stop-color="#FF7A1A" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity=".45"/>
+  </filter>
+</defs>
+<rect width="900" height="900" fill="url(#bg)"/>
+<ellipse cx="450" cy="500" rx="360" ry="300" fill="url(#glow)"/><ellipse cx="450" cy="760" rx="300" ry="42" fill="#000" opacity=".45"/><g transform="translate(450,700) scale(1.15) translate(-450,-700)" filter="url(#sh)"><circle cx="320" cy="660" r="96" fill="#C9872F"/><circle cx="320" cy="660" r="96" fill="none" stroke="#E2A24A" stroke-width="18"/><circle cx="320" cy="660" r="56" fill="#261C1A"/><circle cx="460" cy="580" r="104" fill="#C9872F"/><circle cx="460" cy="580" r="104" fill="none" stroke="#E2A24A" stroke-width="18"/><circle cx="460" cy="580" r="64" fill="#261C1A"/><circle cx="590" cy="670" r="92" fill="#C9872F"/><circle cx="590" cy="670" r="92" fill="none" stroke="#E2A24A" stroke-width="18"/><circle cx="590" cy="670" r="52" fill="#261C1A"/><circle cx="420" cy="710" r="100" fill="#C9872F"/><circle cx="420" cy="710" r="100" fill="none" stroke="#E2A24A" stroke-width="18"/><circle cx="420" cy="710" r="60" fill="#261C1A"/></g></svg>

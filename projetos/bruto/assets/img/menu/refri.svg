@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="42%" r="68%">
+    <stop offset="0" stop-color="#261C1A"/><stop offset="1" stop-color="#1E1512"/>
+  </radialGradient>
+  <radialGradient id="glow" cx="50%" cy="54%" r="46%">
+    <stop offset="0" stop-color="#FF7A1A" stop-opacity=".55"/>
+    <stop offset="1" stop-color="#FF7A1A" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity=".45"/>
+  </filter>
+</defs>
+<rect width="900" height="900" fill="url(#bg)"/>
+<ellipse cx="450" cy="500" rx="360" ry="300" fill="url(#glow)"/><ellipse cx="450" cy="760" rx="300" ry="42" fill="#000" opacity=".45"/><g transform="translate(450,740) scale(1.0) translate(-450,-740)" filter="url(#sh)"><rect x="350" y="410" width="200" height="330" rx="26" fill="#E8473F"/><rect x="350" y="410" width="200" height="330" rx="26" fill="none" stroke="#D13A32" stroke-width="8"/><rect x="350" y="520" width="200" height="86" fill="#FBF6EA" opacity=".95"/><rect x="350" y="544" width="200" height="38" fill="#F6B21B"/><ellipse cx="450" cy="410" rx="100" ry="24" fill="#C9CED6"/><ellipse cx="450" cy="404" rx="72" ry="15" fill="#9AA2AE"/></g></svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="42%" r="68%">
+    <stop offset="0" stop-color="#261C1A"/><stop offset="1" stop-color="#1E1512"/>
+  </radialGradient>
+  <radialGradient id="glow" cx="50%" cy="54%" r="46%">
+    <stop offset="0" stop-color="#FF7A1A" stop-opacity=".55"/>
+    <stop offset="1" stop-color="#FF7A1A" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity=".45"/>
+  </filter>
+</defs>
+<rect width="900" height="900" fill="url(#bg)"/>
+<ellipse cx="450" cy="500" rx="360" ry="300" fill="url(#glow)"/><ellipse cx="450" cy="760" rx="300" ry="42" fill="#000" opacity=".45"/><g transform="translate(450,720) scale(1.35) translate(-450,-720)" filter="url(#sh)"><rect x="250" y="600" width="400" height="120" rx="22" fill="#4A2A1C"/><rect x="250" y="600" width="400" height="34" rx="16" fill="#653A26"/><circle cx="540" cy="520" r="90" fill="#FBF6EA"/><circle cx="540" cy="506" r="90" fill="#FFFDF6"/><path d="M300 590 q60 -70 130 -20 q70 -60 140 10 q-140 40 -270 10 z" fill="#FFC233" opacity=".85"/><circle cx="540" cy="402" r="26" fill="#E8473F"/></g></svg>

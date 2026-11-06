@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BRUTO BURGER CO. — Hambúrguer artesanal feito na hora</title>
+
+<!-- ============ SEO / SOCIAL ============ -->
+<meta name="description" content="Blend de 180g na chapa, pão brioche tostado e cheddar derretido. Peça pelo WhatsApp e receba quentinho. BRUTO BURGER CO.">
+<meta name="theme-color" content="#140D0B">
+<link rel="canonical" href="https://brutoburger.com.br/">
+<meta property="og:type" content="restaurant">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BRUTO BURGER CO. — fogo na chapa, feito pra amar">
+<meta property="og:description" content="Blend de 180g, pão brioche tostado e cheddar derretido. Peça agora pelo WhatsApp.">
+<meta property="og:url" content="https://brutoburger.com.br/">
+<meta property="og:image" content="https://brutoburger.com.br/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F6B21B'/%3E%3Cpath d='M6 20h20v3a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z' fill='%231E1512'/%3E%3Cpath d='M6 12a10 7 0 0 1 20 0z' fill='%231E1512'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%23E8473F'/%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "BRUTO BURGER CO.",
+  "image": "https://brutoburger.com.br/assets/img/og.jpg",
+  "@id": "https://brutoburger.com.br/#loja",
+  "url": "https://brutoburger.com.br/",
+  "telephone": "+55-11-98888-7766",
+  "servesCuisine": ["Hambúrguer", "Americana"],
+  "priceRange": "$$",
+  "acceptsReservations": "False",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua da Brasa, 420 — Loja 2",
+    "addressLocality": "São Paulo",
+    "addressRegion": "SP",
+    "postalCode": "04571-010",
+    "addressCountry": "BR"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -23.6105, "longitude": -46.6972 },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday"], "opens": "18:00", "closes": "23:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "18:00", "closes": "00:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "18:00", "closes": "23:00" }
+  ],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "1284" },
+  "hasMenu": {
+    "@type": "Menu", "name": "Cardápio BRUTO",
+    "hasMenuSection": [{
+      "@type": "MenuSection", "name": "Burgers",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Bruto Clássico", "offers": { "@type": "Offer", "price": "34.90", "priceCurrency": "BRL" } },
+        { "@type": "MenuItem", "name": "Duplo Fogo", "offers": { "@type": "Offer", "price": "46.90", "priceCurrency": "BRL" } }
+      ]
+    }]
+  }
+}
+</script>
+
+<!-- ============ FONTES ============ -->
+<link rel="preconnect" href="https://images.pexels.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<!-- primeiros frames do hero já no caminho crítico -->
+<link rel="preload" as="image" href="assets/frames/f_0001.webp">
+<link rel="preload" as="image" href="assets/frames/f_0120.webp">
+
+<!-- ============ TAILWIND ============ -->
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        char:    { 950: '#140D0B', 900: '#1E1512', 800: '#261C1A' },
+        fire:    { 400: '#F6B21B', 500: '#F2A100' },
+        ketchup: { 500: '#E8473F', 600: '#D13A32' },
+        cream:   { 50:  '#FBF6EA', 100: '#F7F0E1' },
+        ember:   '#FF7A1A'
+      },
+      fontFamily: {
+        display: ['Anton', 'Impact', 'sans-serif'],
+        sans:    ['Barlow', 'system-ui', 'sans-serif'],
+        marker:  ['"Permanent Marker"', 'cursive']
+      },
+      borderRadius: { card: '28px', pill: '9999px' }
+    }
+  }
+}
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-char-950 font-sans text-cream-50 antialiased">
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" class="fixed inset-0 z-[120] grid place-items-center bg-char-950">
+  <div id="pl-box" class="w-[min(320px,76vw)] text-center">
+    <p class="font-display text-[13px] uppercase tracking-[.3em] text-fire-400">Esquentando a chapa...</p>
+    <div class="mt-5 h-[3px] w-full overflow-hidden rounded-pill bg-white/10">
+      <span id="pre-bar" class="block h-full w-0 bg-fire-400"></span>
+    </div>
+    <p id="pre-pct" class="mt-3 font-display text-2xl">0%</p>
+  </div>
+</div>
+
+<!-- ============ CURSOR ============ -->
+<div id="cur" aria-hidden="true"><span></span></div>
+
+<!-- ============ HEADER ============ -->
+<header id="header" class="fixed inset-x-0 top-0 z-[90] border-b border-white/5 bg-char-900/80 backdrop-blur-md">
+  <div class="mx-auto flex h-[70px] max-w-[1240px] items-center gap-6 px-5">
+    <a href="#topo" class="brand shrink-0" aria-label="BRUTO BURGER CO., início">
+      <span class="font-display text-[22px] leading-none tracking-wide">BRUTO<span class="text-fire-400">.</span></span>
+      <svg class="brand-stroke" viewBox="0 0 120 10" aria-hidden="true"><path d="M2 7c22-5 50-6 78-3 12 1 24 2 38 1" stroke="#F6B21B" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+    </a>
+
+    <nav class="nav-desk up-lg ml-6 items-center gap-7" aria-label="Principal">
+      <a class="nav-link" href="#cardapio">Cardápio</a>
+      <a class="nav-link" href="#combos">Combos</a>
+      <a class="nav-link" href="#como-pedir">Como pedir</a>
+      <a class="nav-link" href="#onde">Onde estamos</a>
+    </nav>
+
+    <span id="status-badge" class="status up-sm" role="status">
+      <i class="dot"></i><span>Verificando…</span>
+    </span>
+
+    <div class="ml-auto flex items-center gap-2.5">
+      <a href="#cardapio" class="btn-outline up-sm">Ver cardápio</a>
+      <a href="#cardapio" class="btn-yellow up-sm is-magnetic">Pedir agora</a>
+      <button id="cart-open" class="bag" aria-label="Abrir sacola" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span id="bag-count" class="bag-count" data-count="0">0</span>
+      </button>
+      <button id="menu-open" class="burger only-lg-down" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MENU MOBILE ============ -->
+<div id="mobile-menu" class="fixed inset-0 z-[95] bg-char-900" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="flex h-[70px] items-center justify-between px-5">
+    <span class="font-display text-[22px]">BRUTO<span class="text-fire-400">.</span></span>
+    <button id="menu-close" class="burger is-open" aria-label="Fechar menu"><i></i><i></i><i></i></button>
+  </div>
+  <nav class="px-5 pt-6" aria-label="Menu mobile">
+    <a class="m-link" href="#cardapio">Cardápio</a>
+    <a class="m-link" href="#combos">Combos</a>
+    <a class="m-link" href="#como-pedir">Como pedir</a>
+    <a class="m-link" href="#onde">Onde estamos</a>
+    <a class="btn-yellow mt-8 w-full justify-center" href="#cardapio">Pedir agora</a>
+  </nav>
+</div>
+
+<main id="topo">
+
+<!-- ============ 1. HERO SCROLL-SCRUB ============ -->
+<section id="hero" class="relative bg-char-950" aria-labelledby="hero-title">
+  <div id="hero-pin" class="relative h-[100svh] w-full overflow-hidden">
+
+    <div id="hero-glow" aria-hidden="true"></div>
+    <canvas id="embers" aria-hidden="true"></canvas>
+
+    <!-- sequência de frames -->
+    <div id="stage">
+      <canvas id="frames" role="img"
+              aria-label="Hambúrguer artesanal sendo montado camada por camada sobre as chamas da chapa"></canvas>
+      <noscript>
+        <img src="assets/img/hero-poster.webp" width="540" height="960" alt="Hambúrguer artesanal montado com blend, cheddar, bacon e salada">
+      </noscript>
+      <!-- cobre a marca d'água do vídeo original -->
+      <div id="stage-foot" aria-hidden="true">
+        <span class="font-display text-[13px] tracking-[.18em] text-cream-50/90">BRUTO BURGER CO.</span>
+      </div>
+    </div>
+    <div id="hero-vignette" aria-hidden="true"></div>
+
+    <!-- bloco de abertura -->
+    <div id="hero-intro" class="hero-layer">
+      <div class="mx-auto flex h-full max-w-[1240px] items-center px-5">
+        <div id="hero-copy" class="max-w-[520px]">
+          <p class="mb-5 font-display text-[12px] uppercase tracking-[.34em] text-fire-400">Hamburgueria artesanal</p>
+          <h1 id="hero-title" class="font-display text-[clamp(3rem,9vw,6.5rem)] uppercase leading-[0.9]">
+            Fogo na chapa.<br>Feito pra <span class="text-fire-400">amar.</span>
+          </h1>
+          <p class="mt-6 max-w-[42ch] text-[15px] leading-relaxed text-cream-50/70">
+            Blend de 180g, pão brioche tostado e cheddar derretido. Monte o seu rolando a página.
+          </p>
+          <div class="mt-9 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[.3em] text-cream-50/60">
+            <span class="scroll-mouse" aria-hidden="true"><i></i></span> Role
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- legendas dos ingredientes (preenchidas pelo JS a partir de HERO.beats) -->
+    <div id="hero-beats" class="hero-layer" aria-hidden="true"></div>
+    <div id="hero-chips" aria-hidden="true"></div>
+
+    <!-- bloco final -->
+    <div id="hero-outro" class="hero-layer">
+      <div class="mx-auto flex h-full max-w-[1240px] flex-col items-center justify-end px-5 pb-[12svh] text-center">
+        <h2 class="font-display text-[clamp(2.2rem,6vw,4rem)] uppercase leading-[0.9]">Montado <span class="text-fire-400">na hora.</span></h2>
+        <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <button class="btn-primary is-magnetic" data-add="bruto-classico">Pedir agora</button>
+          <a class="btn-outline" href="#cardapio">Ver cardápio</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- selo adesivo -->
+    <div id="hero-seal" aria-hidden="true">
+      <svg viewBox="0 0 160 160" class="seal-spin">
+        <defs><path id="sealpath" d="M80 80 m-58 0 a58 58 0 1 1 116 0 a58 58 0 1 1 -116 0"/></defs>
+        <text class="seal-text"><textPath href="#sealpath" startOffset="0">A PARTIR DE R$ 34,90 • BRUTO BURGER CO. • </textPath></text>
+      </svg>
+      <span class="seal-core font-display">R$<br>34,90</span>
+    </div>
+
+    <!-- barra de progresso do hero -->
+    <div id="hero-progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<!-- ============ 2. MARQUEE ============ -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee" id="marquee">
+    <div class="marquee-track">
+      <span>Fresh • Hot • Feito na hora • Sem atalho • </span>
+      <span>Fresh • Hot • Feito na hora • Sem atalho • </span>
+      <span>Fresh • Hot • Feito na hora • Sem atalho • </span>
+      <span>Fresh • Hot • Feito na hora • Sem atalho • </span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3. MAIS PEDIDOS ============ -->
+<section id="cardapio" class="bg-cream-50 py-20 text-char-900 md:py-28">
+  <div class="mx-auto max-w-[1240px] px-5">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <h2 class="font-display text-[clamp(2.2rem,5vw,3.8rem)] uppercase leading-[0.9]" data-reveal>
+        Os <span class="text-ketchup-500">mais pedidos</span><br>da casa
+      </h2>
+      <p class="max-w-[38ch] text-[15px] leading-relaxed text-char-900/65" data-reveal>
+        Tudo montado na hora do pedido. Se faltar um ingrediente do dia, a gente avisa antes de cobrar.
+      </p>
+    </div>
+
+    <div id="tabs" class="mt-10 flex flex-wrap gap-2" role="tablist" aria-label="Categorias do cardápio"></div>
+    <div id="grid" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+</section>
+
+<!-- ============ 4. COMBOS ============ -->
+<section id="combos" class="relative overflow-hidden bg-fire-400 py-20 text-char-950 md:py-28">
+  <svg class="starburst" viewBox="0 0 400 400" aria-hidden="true"><g id="burst"></g></svg>
+  <div class="relative mx-auto max-w-[1240px] px-5">
+    <h2 class="max-w-[16ch] font-display text-[clamp(2.2rem,5.4vw,4rem)] uppercase leading-[0.9]" data-reveal>
+      Combo fechado <span class="text-ketchup-600">sai mais barato.</span>
+    </h2>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      <article class="combo-card bg-char-900 text-cream-50" data-reveal>
+        <img src="assets/img/burger-combo.webp" width="960" height="782" loading="lazy" class="combo-img"
+             alt="Hambúrguer artesanal com cheddar derretido sobre as chamas da chapa">
+        <div class="combo-body">
+          <p class="font-marker text-[15px] text-fire-400">o preferido da casa</p>
+          <h3 class="mt-2 font-display text-[28px] uppercase leading-none">Combo Bruto</h3>
+          <p class="mt-3 text-[14px] leading-relaxed text-cream-50/70">Bruto Clássico + fritas rústicas + refri lata gelado.</p>
+          <div class="mt-6 flex items-center gap-4">
+            <span class="font-display text-[30px] text-fire-400">R$ 49,90</span>
+            <button class="btn-primary" data-add="combo-bruto">Montar meu combo</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="combo-card bg-cream-50 text-char-900" data-reveal>
+        <img src="https://images.pexels.com/photos/2340204/pexels-photo-2340204.jpeg?auto=compress&cs=tinysrgb&w=960&h=600&fit=crop"
+             width="960" height="600" loading="lazy" class="combo-img"
+             onerror="this.onerror=null;this.src='assets/img/menu/combo-duplo.svg';this.classList.add('combo-img--pad')"
+             alt="Dois hambúrgueres com milkshakes, anéis de cebola e batata rústica sobre mesa de madeira">
+        <div class="combo-body">
+          <p class="font-marker text-[15px] text-ketchup-500">pra dividir (ou não)</p>
+          <h3 class="mt-2 font-display text-[28px] uppercase leading-none">Combo Duplo Fogo</h3>
+          <p class="mt-3 text-[14px] leading-relaxed text-char-900/65">Dois blends de 180g, fritas grandes e duas bebidas.</p>
+          <div class="mt-6 flex items-center gap-4">
+            <span class="font-display text-[30px] text-ketchup-500">R$ 79,90</span>
+            <button class="btn-primary" data-add="combo-duplo">Montar meu combo</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. POR QUE SOMOS DIFERENTES ============ -->
+<section id="porque" class="bg-cream-100 py-20 text-char-900 md:py-28">
+  <div class="mx-auto grid max-w-[1240px] items-center gap-14 px-5 md:grid-cols-2">
+    <div class="order-2 md:order-1">
+      <img id="float-burger" src="assets/img/burger-montado.webp" width="600" height="750" loading="lazy"
+           class="mx-auto w-full max-w-[460px] rounded-card"
+           alt="Hambúrguer BRUTO montado, com blend, cheddar, bacon, alface, tomate e cebola roxa">
+    </div>
+    <div class="order-1 md:order-2">
+      <h2 class="font-display text-[clamp(2rem,4.6vw,3.4rem)] uppercase leading-[0.9]" data-reveal>
+        Fresh, hot &amp; feito<br>pra <span class="text-ketchup-500">devorar</span>
+      </h2>
+      <div class="mt-10 grid gap-8 sm:grid-cols-2">
+        <div class="feature" data-reveal>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          <h3>Ingredientes frescos</h3>
+          <p>Hortifruti recebido todo dia de manhã. Nada congelado na montagem.</p>
+        </div>
+        <div class="feature" data-reveal>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/></svg>
+          <h3>Pão artesanal</h3>
+          <p>Brioche assado por uma padaria do bairro e tostado na manteiga.</p>
+        </div>
+        <div class="feature" data-reveal>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5Z"/></svg>
+          <h3>Carne no ponto</h3>
+          <p>Blend 180g de acém com costela, selado na chapa a 230°C.</p>
+        </div>
+        <div class="feature" data-reveal>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          <h3>Entrega rápida</h3>
+          <p>Raio de 6 km, embalagem que respira e média de 32 minutos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. COMO PEDIR ============ -->
+<section id="como-pedir" class="bg-char-950 py-20 md:py-28">
+  <div class="mx-auto max-w-[1240px] px-5">
+    <h2 class="font-display text-[clamp(2rem,4.6vw,3.4rem)] uppercase leading-[0.9]" data-reveal>
+      Pedir é <span class="text-fire-400">rápido assim</span>
+    </h2>
+
+    <div class="relative mt-14">
+      <svg class="dash-line" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true">
+        <path id="dash-path" d="M60 30 C 280 -10 420 70 500 30 S 760 -10 940 30" fill="none"
+              stroke="#F6B21B" stroke-width="3" stroke-dasharray="10 12" stroke-linecap="round" opacity=".8"/>
+      </svg>
+      <ol class="relative grid gap-10 md:grid-cols-3">
+        <li class="step" data-reveal><span class="step-n">1</span><h3>Escolha</h3><p>Abra o cardápio e toque no “+” do que der vontade.</p></li>
+        <li class="step" data-reveal><span class="step-n">2</span><h3>Monte seu pedido</h3><p>Ajuste quantidades, escreva observações e confira o total.</p></li>
+        <li class="step" data-reveal><span class="step-n">3</span><h3>Receba quentinho</h3><p>Finalize pelo WhatsApp e acompanhe até a sua porta.</p></li>
+      </ol>
+    </div>
+
+    <div class="mt-12 flex flex-wrap gap-3">
+      <a id="wpp-link" class="btn-primary" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      <a id="ifood-link" class="btn-outline" href="#" target="_blank" rel="noopener">Pedir pelo iFood</a>
+      <a class="btn-outline" href="#onde">Retirar no balcão</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. DEPOIMENTOS ============ -->
+<section id="depoimentos" class="bg-char-900 py-20 md:py-24">
+  <div class="mx-auto max-w-[1240px] px-5">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <h2 class="font-display text-[clamp(1.8rem,4vw,3rem)] uppercase leading-[0.9]" data-reveal>Quem já<br>mordeu</h2>
+      <p class="text-[14px] text-cream-50/65">
+        <strong class="font-display text-[30px] text-fire-400"><span data-count="4.9" data-decimals="1">0</span></strong>
+        no Google · <span data-count="1284">0</span> avaliações
+      </p>
+    </div>
+
+    <div class="swiper mt-10" id="depo-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><figure class="depo">
+          <div class="stars" aria-label="5 de 5">★★★★★</div>
+          <blockquote>Pedi às 20h e chegou em 25 minutos ainda pingando queijo. O pão não desmontou no caminho, o que já é raro.</blockquote>
+          <figcaption><strong>Rafa M.</strong><span>Vila Mariana</span></figcaption></figure></div>
+        <div class="swiper-slide"><figure class="depo">
+          <div class="stars" aria-label="5 de 5">★★★★★</div>
+          <blockquote>O Duplo Fogo é absurdo. Pedi sem cebola nas observações e veio certinho, com bilhete escrito à mão.</blockquote>
+          <figcaption><strong>Camila A.</strong><span>Saúde</span></figcaption></figure></div>
+        <div class="swiper-slide"><figure class="depo">
+          <div class="stars" aria-label="5 de 5">★★★★★</div>
+          <blockquote>Melhor batata rústica da região, e olha que eu testei bastante. Virou o pedido fixo de sexta aqui em casa.</blockquote>
+          <figcaption><strong>Diego N.</strong><span>Ipiranga</span></figcaption></figure></div>
+        <div class="swiper-slide"><figure class="depo">
+          <div class="stars" aria-label="5 de 5">★★★★★</div>
+          <blockquote>Atendimento no WhatsApp respondeu em 2 minutos e ainda sugeriram um combo mais barato que o meu carrinho.</blockquote>
+          <figcaption><strong>Pri L.</strong><span>Jabaquara</span></figcaption></figure></div>
+      </div>
+      <div class="swiper-pagination mt-8"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. ONDE ESTAMOS ============ -->
+<section id="onde" class="bg-char-950 py-20 md:py-28">
+  <div class="mx-auto grid max-w-[1240px] gap-8 px-5 lg:grid-cols-[1fr_1.1fr]">
+    <div class="rounded-card border border-white/10 bg-char-900 p-8">
+      <h2 class="font-display text-[clamp(1.8rem,4vw,2.8rem)] uppercase leading-[0.9]">Onde a <span class="text-fire-400">brasa</span> fica</h2>
+      <address class="mt-6 not-italic text-[15px] leading-relaxed text-cream-50/75">
+        Rua da Brasa, 420 — Loja 2<br>Santo Amaro · São Paulo — SP
+      </address>
+      <ul id="hours-list" class="mt-7 space-y-1.5 text-[14px]"></ul>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="btn-yellow" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query=Rua+da+Brasa+420+Sao+Paulo">Como chegar</a>
+        <a class="btn-outline" href="tel:+5511988887766">(11) 98888-7766</a>
+      </div>
+    </div>
+    <div class="overflow-hidden rounded-card border border-white/10">
+      <iframe title="Mapa da localização da BRUTO BURGER CO." class="h-full min-h-[320px] w-full" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Santo+Amaro,+S%C3%A3o+Paulo&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. CTA FINAL ============ -->
+<section class="relative overflow-hidden bg-fire-400 py-20 text-char-950 md:py-24">
+  <div class="mx-auto grid max-w-[1240px] items-center gap-8 px-5 md:grid-cols-[1.2fr_1fr]">
+    <div>
+      <h2 class="font-display text-[clamp(2.6rem,7vw,5.4rem)] uppercase leading-[0.86]" data-reveal>
+        Fome? <span class="text-ketchup-600">É agora.</span>
+      </h2>
+      <p class="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-char-950/75" data-reveal>
+        A chapa está quente e o pão acabou de chegar. Seu pedido sai em cerca de 30 minutos.
+      </p>
+      <button class="btn-primary mt-8 is-magnetic" data-add="bruto-classico" data-reveal>Pedir agora</button>
+    </div>
+    <img src="assets/img/burger-montado.webp" width="600" height="750" loading="lazy"
+         class="mx-auto w-full max-w-[320px] rounded-card" alt="Hambúrguer BRUTO pronto para o pedido">
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-char-950 pb-28 pt-16 md:pb-16">
+  <div class="mx-auto grid max-w-[1240px] gap-10 px-5 md:grid-cols-3">
+    <div>
+      <span class="font-display text-[26px]">BRUTO BURGER CO.<span class="text-fire-400">.</span></span>
+      <p class="mt-4 max-w-[32ch] text-[13.5px] leading-relaxed text-cream-50/55">
+        Hamburgueria artesanal em Santo Amaro. Blend próprio, pão de padaria e fila que anda.
+      </p>
+      <div class="mt-6 flex gap-2.5">
+        <a class="soc" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="soc" href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M16.5 3c.3 2.2 1.6 3.6 3.8 3.8v2.6c-1.4.1-2.7-.3-3.9-1v5.9c0 4.1-3.4 6.4-6.6 5.4-2.2-.7-3.6-2.8-3.5-5.1.1-2.7 2.5-4.9 5.6-4.5v2.7c-.4-.1-.8-.2-1.2-.2-1.3 0-2.3 1-2.3 2.3s1 2.3 2.3 2.3 2.3-1 2.3-2.3V3h3.5z"/></svg></a>
+        <a class="soc" id="wpp-footer" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.2.6 1.1 1.4 1.8 1 .9 1.8 1.1 2 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l2 .9c.2.1.4.2.4.3.1.2.1.6-.1 1.2z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h3 class="font-display text-[13px] uppercase tracking-[.3em] text-cream-50/50">Navegar</h3>
+      <ul class="mt-5 space-y-2 text-[14px]">
+        <li><a class="flink" href="#cardapio">Cardápio</a></li>
+        <li><a class="flink" href="#combos">Combos</a></li>
+        <li><a class="flink" href="#como-pedir">Como pedir</a></li>
+        <li><a class="flink" href="#onde">Onde estamos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-display text-[13px] uppercase tracking-[.3em] text-cream-50/50">Legal</h3>
+      <ul class="mt-5 space-y-2 text-[14px]">
+        <li><a class="flink" href="#">Termos de uso</a></li>
+        <li><a class="flink" href="#">Política de privacidade</a></li>
+        <li class="pt-2 text-cream-50/50">CNPJ 00.000.000/0001-00</li>
+      </ul>
+    </div>
+  </div>
+  <p class="mx-auto mt-12 max-w-[1240px] border-t border-white/5 px-5 pt-6 text-[12px] text-cream-50/40">
+    © <span id="ano">2026</span> BRUTO BURGER CO. Todos os direitos reservados.
+  </p>
+</footer>
+
+<!-- ============ SACOLA (DRAWER) ============ -->
+<div id="cart-backdrop" class="fixed inset-0 z-[100] bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<aside id="cart" class="cart" role="dialog" aria-modal="true" aria-label="Sua sacola" aria-hidden="true">
+  <header class="flex items-center justify-between border-b border-white/10 px-5 py-4">
+    <h2 class="font-display text-[20px] uppercase">Sua sacola</h2>
+    <button id="cart-close" class="icon-btn" aria-label="Fechar sacola">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </header>
+
+  <div id="cart-body" class="cart-body"></div>
+
+  <form id="checkout" class="checkout" novalidate hidden>
+    <h3 class="font-display text-[16px] uppercase tracking-wide">Seus dados</h3>
+    <div class="fld"><label for="ck-nome">Nome</label><input id="ck-nome" name="nome" type="text" autocomplete="name" required placeholder="Como te chamar"><small class="err" data-err="ck-nome"></small></div>
+    <div class="fld"><label for="ck-fone">WhatsApp</label><input id="ck-fone" name="fone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(11) 99999-9999"><small class="err" data-err="ck-fone"></small></div>
+
+    <fieldset class="fld">
+      <legend>Entrega ou retirada</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="modo" value="entrega" checked><span>Entrega</span></label>
+        <label class="radio"><input type="radio" name="modo" value="retirada"><span>Retirar no balcão</span></label>
+      </div>
+    </fieldset>
+
+    <div id="bloco-endereco">
+      <div class="grid grid-cols-[1fr_auto] gap-2">
+        <div class="fld"><label for="ck-cep">CEP</label><input id="ck-cep" name="cep" type="text" inputmode="numeric" placeholder="00000-000"><small class="err" data-err="ck-cep"></small></div>
+        <button type="button" id="cep-btn" class="btn-outline mt-[26px] h-[44px]">Buscar</button>
+      </div>
+      <div class="fld"><label for="ck-rua">Endereço</label><input id="ck-rua" name="rua" type="text" placeholder="Rua, número e complemento"><small class="err" data-err="ck-rua"></small></div>
+      <div class="fld"><label for="ck-bairro">Bairro</label><input id="ck-bairro" name="bairro" type="text" placeholder="Bairro"></div>
+    </div>
+
+    <div class="fld"><label for="ck-pag">Pagamento</label>
+      <select id="ck-pag" name="pagamento">
+        <option>Pix</option><option>Cartão na entrega</option><option>Dinheiro</option>
+      </select>
+    </div>
+    <div class="fld" id="bloco-troco" hidden><label for="ck-troco">Troco para quanto?</label><input id="ck-troco" name="troco" type="text" inputmode="numeric" placeholder="R$ 100,00"></div>
+
+    <button type="submit" class="btn-primary w-full justify-center">Enviar pedido pelo WhatsApp</button>
+    <button type="button" id="ck-voltar" class="btn-ghost w-full justify-center">Voltar para a sacola</button>
+  </form>
+
+  <footer id="cart-foot" class="cart-foot">
+    <div class="flex items-center justify-between text-[13px] text-cream-50/65"><span>Subtotal</span><span id="sum-sub">R$ 0,00</span></div>
+    <div class="mt-1 flex items-center justify-between text-[13px] text-cream-50/65"><span>Taxa de entrega</span><span id="sum-fee">R$ 0,00</span></div>
+    <div class="mt-3 flex items-center justify-between"><span class="font-display text-[15px] uppercase">Total</span><span id="sum-total" class="font-display text-[26px] text-fire-400">R$ 0,00</span></div>
+    <button id="go-checkout" class="btn-primary mt-4 w-full justify-center">Finalizar pedido</button>
+  </footer>
+</aside>
+
+<!-- ============ BARRA MOBILE + WHATSAPP + TOAST ============ -->
+<button id="mobile-bar" class="mobile-bar" hidden>
+  <span>Ver sacola (<span id="mb-count">0</span>)</span><span id="mb-total" class="font-display text-[18px]">R$ 0,00</span>
+</button>
+<a id="wpp-float" class="wpp-float" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.2.6 1.1 1.4 1.8 1 .9 1.8 1.1 2 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l2 .9c.2.1.4.2.4.3.1.2.1.6-.1 1.2z"/></svg>
+</a>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- ============ BIBLIOTECAS ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

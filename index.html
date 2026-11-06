@@ -1,211 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OGZ CORPORATION | Sites profissionais, landing pages e catálogos digitais</title>
-<meta name="description" content="A OGZ CORPORATION desenvolve sites institucionais, landing pages e catálogos digitais para empresas de Apucarana, Paraná, e de todo o Brasil.">
-<meta name="theme-color" content="#111111">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="OGZ CORPORATION | Digital Excellence.">
-<meta property="og:description" content="Transformamos sua presença digital em oportunidades de negócio.">
-<!-- Adicione: <meta property="og:image" content="URL_DA_IMAGEM"> e <meta property="og:url" content="URL_DO_SITE"> -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  <title>OGZ CORPORATION — Não é só um site. É a sua posição.</title>
+  <meta name="description" content="Sites sob medida para posicionar sua marca e transformar visitas em contatos. Conheça os projetos e os planos da OGZ Corporation, por vinxz.ogz.">
+  <meta property="og:title" content="OGZ CORPORATION — Sua marca no lugar certo.">
+  <meta property="og:description" content="Design, posicionamento e experiências digitais que conectam seu negócio a quem procura por ele.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="./assets/ogz-fundador.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050505'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='900' font-size='33' text-anchor='middle' fill='%23c6ff3d'%3EOGZ%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;450;500;550;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="./assets/ogz-fundador.webp" fetchpriority="high">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config={theme:{extend:{colors:{ink:{950:'#050505',900:'#0B0B0B',800:'#121212',700:'#1A1A1A'},cream:{100:'#F4ECDC',300:'#EADFC8'},volt:{400:'#C6FF3D',500:'#B2F020',600:'#8FC213'},smoke:{400:'#8C8C8C',500:'#6B6B6B'}},fontFamily:{impact:['Anton','sans-serif'],display:['Space Grotesk','sans-serif'],sans:['Inter','sans-serif'],mono:['JetBrains Mono','monospace']}}}};</script>
+  <script type="application/ld+json" id="business-schema">{"@context":"https://schema.org","@type":"ProfessionalService","name":"OGZ CORPORATION","description":"Criação de sites e posicionamento digital.","founder":{"@type":"Person","name":"vinxz.ogz"},"areaServed":{"@type":"Country","name":"Brasil"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Criação de sites","itemListElement":[{"@type":"Offer","priceCurrency":"BRL","price":"400","itemOffered":{"@type":"Service","name":"Landing Page"}},{"@type":"Offer","priceCurrency":"BRL","price":"600","itemOffered":{"@type":"Service","name":"Site 3D"}},{"@type":"Offer","priceCurrency":"BRL","price":"500","itemOffered":{"@type":"Service","name":"Site Institucional"}}]}}</script>
 </head>
 <body>
-<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="preloader" id="preloader" aria-hidden="true" hidden><span>OGZ<span class="volt-dot">•</span></span><div class="preloader-track"><i></i></div><small>CONSTRUINDO A SUA PRÓXIMA POSIÇÃO.</small></div>
+  <svg class="icon-sprite" aria-hidden="true"><defs>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="spark" viewBox="0 0 24 24"><path d="m12 3 2 7 7 2-7 2-2 7-2-7-7-2 7-2Z"/></symbol>
+    <symbol id="phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+    <symbol id="message" viewBox="0 0 24 24"><path d="M21 11.5a9 9 0 0 1-13.4 7.8L3 21l1.3-4.6A9 9 0 1 1 21 11.5Z"/><path d="M8 7.5c-.8.3-.8 2-.1 3.5 1 2 3.2 4.1 5.3 4.5 1.7.3 2.8-.3 2.8-1.3l-2.3-1.4-1.1 1c-1.5-.7-2.5-1.7-3.2-3.2l.9-1.1L9 7.3Z"/></symbol>
+    <symbol id="instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+    <symbol id="shield" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6Z"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="cursor" viewBox="0 0 24 24"><path d="m4 3 5 17 4-7 7-4Z"/></symbol>
+  </defs></svg>
+  <main id="conteudo">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-spotlight" aria-hidden="true"></div><div class="hero-vignette" aria-hidden="true"></div>
+      <header class="hero-header"><div class="hero-brand"><a class="ogz-mark" href="#inicio" aria-label="OGZ Corporation, início">OGZ<span>•</span></a><span class="hero-studio">WEB STUDIO /<br>POSICIONAMENTO DIGITAL</span></div><div class="hero-top-actions"><a class="button glass budget-button" href="#planos">Orçamento <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a><a class="hero-next" href="#projetos" aria-label="Conhecer os projetos da OGZ"><svg viewBox="0 0 80 24" aria-hidden="true"><path d="M2 12h73m-9-8 9 8-9 8"/></svg></a></div></header>
+      <!-- Both text layers share identical metrics. Only the outline sits above the photo. -->
+      <div class="hero-type-wrap type-back"><div class="type-exit"><div class="type-parallax"><h1 class="hero-type" id="hero-title" aria-label="OGZ CORPORATION"><span class="hero-word word-ogz" aria-hidden="true">OGZ</span><span class="hero-word word-corporation" aria-hidden="true">CORPORATION</span></h1></div></div></div>
+      <div class="portrait-scroll"><div class="portrait-mouse"><img class="founder-photo" id="founder-photo" src="./assets/ogz-fundador.webp" alt="vinxz.ogz, fundador da OGZ Corporation, de camisa branca e gravata, com uma jaqueta no braço" width="1092" height="1441" fetchpriority="high"></div></div>
+      <div class="hero-type-wrap type-front" aria-hidden="true"><div class="type-exit"><div class="type-parallax"><div class="hero-type"><span class="hero-word word-ogz">OGZ</span><span class="hero-word word-corporation">CORPORATION</span></div></div></div></div>
+      <div class="hero-bottom"><span>FUNDADOR: <strong data-founder>vinxz.ogz</strong></span><a href="https://www.instagram.com/ogz.coporation/" target="_blank" rel="noopener noreferrer" id="hero-domain">@ogz.coporation <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+      <a href="#projetos" class="scroll-cue"><span>ROLE PARA DESCOBRIR</span><i aria-hidden="true"></i></a>
+      <span class="hero-index" aria-hidden="true">DESIGN & CÓDIGO / BRASIL</span>
+    </section>
 
-<header class="header" id="topo">
-  <div class="container header__in">
-    <a class="logo" href="#inicio" aria-label="OGZ CORPORATION — início"><span class="logo__mark">OGZ</span><span class="logo__sub">CORPORATION</span></a>
-    <button class="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
-    <nav class="nav" id="menu" aria-label="Principal">
-      <a href="#inicio">Início</a><a href="#servicos">Serviços</a><a href="#projetos">Projetos</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a>
-      <a class="btn btn--sm" data-wa="geral" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Solicitar orçamento</a>
-    </nav>
-  </div>
-</header>
-
-<main id="conteudo">
-<section class="hero" id="inicio">
-  <div class="container hero__grid">
-    <div class="hero__text">
-      <p class="tagline">Digital Excellence.</p>
-      <h1>Seu negócio merece uma <em>presença digital</em> à altura.</h1>
-      <p class="lead">Desenvolvemos sites profissionais que apresentam sua empresa, valorizam sua marca e transformam visitantes em oportunidades comerciais.</p>
-      <div class="actions">
-        <a class="btn" href="#servicos">Conheça nossos serviços</a>
-        <a class="btn btn--ghost" data-wa="geral" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Solicitar orçamento</a>
+    <section class="cases" id="projetos" aria-labelledby="cases-title"><div class="cases-heading container"><span class="eyebrow"><i></i> PROJETOS SELECIONADOS / 01—05</span><h2 id="cases-title">Sites que já colocamos<br><span>no topo.</span></h2><p>Cinco projetos. Cinco jeitos de marcar presença.<br>Clique em um card e entre na experiência.</p><a class="button secondary" href="#planos">Agora é a vez da sua marca <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+      <div class="gallery-region" id="gallery" role="region" aria-label="Projetos da OGZ Corporation" aria-roledescription="carrossel" tabindex="0" aria-describedby="gallery-instructions">
+        <p class="sr-only" id="gallery-instructions">Use as setas para navegar, arraste os cards ou deslize para os lados. Use Tab para escolher um projeto e Enter para abrir o site em uma nova aba.</p>
+        <div class="gallery-stage" id="gallery-stage"><div class="gallery-halo" aria-hidden="true"></div><div class="gallery-floor" aria-hidden="true"></div><div class="gallery-laser" aria-hidden="true"></div><div class="gallery-cards" id="gallery-cards">
+          <a class="project-card" href="./projetos/yumed/" target="_blank" rel="noopener noreferrer" aria-label="Visitar site YU.MED" data-project="0"><img src="./assets/sites/site-1.webp" srcset="./assets/sites/site-1-small.webp 600w, ./assets/sites/site-1.webp 1000w" sizes="(max-width:600px) 70vw, 25vw" width="1000" height="1924" alt="Site da YU.MED com sorriso, tipografia editorial e painéis de vidro azul-marinho" loading="lazy" draggable="false"><span class="card-halftone" aria-hidden="true"></span><span class="project-tag">ODONTOLOGIA · LANDING PAGE</span><span class="project-bottom"><span><small>01 / ESTÉTICA & CUIDADO</small><strong>YU.MED</strong></span><span class="project-visit">Visitar <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></span></a>
+          <a class="project-card" href="./projetos/kinetic/" target="_blank" rel="noopener noreferrer" aria-label="Visitar site KINETIC" data-project="1"><img src="./assets/sites/site-2.webp" srcset="./assets/sites/site-2-small.webp 600w, ./assets/sites/site-2.webp 1000w" sizes="(max-width:600px) 70vw, 25vw" width="1000" height="3875" alt="Site minimalista da KINETIC em preto e branco com fotografia de fisioterapia" loading="lazy" draggable="false"><span class="card-halftone" aria-hidden="true"></span><span class="project-tag">FISIOTERAPIA · INSTITUCIONAL</span><span class="project-bottom"><span><small>02 / CIÊNCIA & MOVIMENTO</small><strong>KINETIC</strong></span><span class="project-visit">Visitar <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></span></a>
+          <a class="project-card" href="./projetos/nexo/" target="_blank" rel="noopener noreferrer" aria-label="Visitar site NEXO" data-project="2"><img src="./assets/sites/site-3.webp" srcset="./assets/sites/site-3-small.webp 600w, ./assets/sites/site-3.webp 1000w" sizes="(max-width:600px) 70vw, 25vw" width="1000" height="7186" alt="Site NEXO com retrato do contador, dourado e uma cena financeira 3D" loading="lazy" draggable="false"><span class="card-halftone" aria-hidden="true"></span><span class="project-tag">CONTABILIDADE · EXPERIÊNCIA 3D</span><span class="project-bottom"><span><small>03 / NÚMEROS & ESTRATÉGIA</small><strong>NEXO</strong></span><span class="project-visit">Visitar <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></span></a>
+          <a class="project-card" href="./projetos/vertice/" target="_blank" rel="noopener noreferrer" aria-label="Visitar site VÉRTICE" data-project="3"><img src="./assets/sites/site-4.webp" srcset="./assets/sites/site-4-small.webp 600w, ./assets/sites/site-4.webp 1000w" sizes="(max-width:600px) 70vw, 25vw" width="1000" height="6611" alt="Site Vértice de estética automotiva com uma identidade visual azul e preta" loading="lazy" draggable="false"><span class="card-halftone" aria-hidden="true"></span><span class="project-tag">AUTOMOTIVO · IMERSIVO</span><span class="project-bottom"><span><small>04 / PRECISÃO & PERSONALIDADE</small><strong>VÉRTICE</strong></span><span class="project-visit">Visitar <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></span></a>
+          <a class="project-card" href="./projetos/bruto/" target="_blank" rel="noopener noreferrer" aria-label="Visitar site BRUTO BURGER" data-project="4"><img src="./assets/sites/site-5.webp" srcset="./assets/sites/site-5-small.webp 600w, ./assets/sites/site-5.webp 1000w" sizes="(max-width:600px) 70vw, 25vw" width="1000" height="6377" alt="Site BRUTO BURGER com um hambúrguer artesanal e cardápio interativo" loading="lazy" draggable="false"><span class="card-halftone" aria-hidden="true"></span><span class="project-tag">GASTRONOMIA · INTERATIVO</span><span class="project-bottom"><span><small>05 / SABOR & ATITUDE</small><strong>BRUTO BURGER</strong></span><span class="project-visit">Visitar <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></span></a>
+        </div></div>
+        <div class="gallery-controls"><button class="round glass" id="gallery-prev" aria-label="Projeto anterior"><svg class="icon" style="rotate:180deg" aria-hidden="true"><use href="#right"/></svg></button><div class="gallery-counter"><span id="gallery-current">03</span><span>/</span><span id="gallery-total">05</span><div class="gallery-progress"><i></i></div></div><button class="round glass" id="gallery-next" aria-label="Próximo projeto"><svg class="icon" aria-hidden="true"><use href="#right"/></svg></button></div><p class="gallery-status sr-only" id="gallery-status" role="status" aria-live="polite"></p>
       </div>
-      <p class="note">Atendimento em todo o Brasil.</p>
-    </div>
-    <div class="hero__visual" aria-hidden="true">
-      <div class="browser">
-        <div class="browser__bar"><i></i><i></i><i></i><span></span></div>
-        <div class="browser__body">
-          <div class="mk-nav"><b></b><u></u><u></u><u></u></div>
-          <div class="mk-title"></div><div class="mk-title mk-title--s"></div>
-          <div class="mk-line"></div><div class="mk-line mk-line--s"></div>
-          <div class="mk-btn"></div>
-          <div class="mk-cards"><i></i><i></i><i></i></div>
-        </div>
-      </div>
-      <div class="phone">
-        <div class="phone__notch"></div>
-        <div class="mk-title mk-title--s"></div><div class="mk-line"></div><div class="mk-line mk-line--s"></div>
-        <div class="mk-img"></div><div class="mk-btn mk-btn--w"></div>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="case-pillars container"><article><svg class="icon" aria-hidden="true"><use href="#spark"/></svg><h3>Feitos sob medida.</h3><p>Nenhum template. Cada site nasce da identidade de quem está por trás da marca.</p></article><article><svg class="icon" aria-hidden="true"><use href="#phone"/></svg><h3>Rápidos no celular.</h3><p>Carregamento otimizado e uma experiência pensada primeiro para quem chega pelo celular.</p></article><article><svg class="icon" aria-hidden="true"><use href="#message"/></svg><h3>Prontos para gerar contatos.</h3><p>Botões, formulários e WhatsApp estrategicamente posicionados para começar conversas.</p></article></div>
+      <div class="case-section-end container"><span>IDENTIDADE FORTE. EXPERIÊNCIA FLUIDA. PRÓXIMO PASSO CLARO.</span><span>DESIGN + CÓDIGO + ESTRATÉGIA</span></div>
+    </section>
 
-<section class="section section--light" id="servicos">
-  <div class="container">
-    <header class="head"><h2>Soluções digitais para empresas que querem evoluir.</h2><p>Da primeira impressão à conversão, desenvolvemos experiências digitais pensadas para o seu negócio.</p></header>
-    <div class="cards">
-      <article class="card reveal">
-        <span class="card__n">Serviço 01</span>
-        <h3>Sites institucionais</h3>
-        <p>Apresente sua empresa com profissionalismo. Desenvolvemos sites que destacam seus serviços, fortalecem sua credibilidade e facilitam o contato com seus clientes.</p>
-        <ul><li>Apresentação profissional da empresa.</li><li>Layout responsivo para celulares e computadores.</li><li>Integração com WhatsApp.</li><li>Apresentação de produtos e serviços.</li><li>Estrutura otimizada para mecanismos de busca.</li></ul>
-        <a class="btn" data-wa="institucional" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Quero um site institucional</a>
-      </article>
-      <article class="card reveal">
-        <span class="card__n">Serviço 02</span>
-        <h3>Landing pages</h3>
-        <p>Páginas estratégicas desenvolvidas para apresentar uma oferta, destacar seus diferenciais e incentivar o visitante a entrar em contato.</p>
-        <ul><li>Comunicação objetiva.</li><li>Estrutura focada em conversão.</li><li>Chamadas para ação estratégicas.</li><li>Design personalizado.</li><li>Experiência otimizada para dispositivos móveis.</li></ul>
-        <a class="btn" data-wa="landing" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Quero uma landing page</a>
-      </article>
-      <article class="card reveal">
-        <span class="card__n">Serviço 03</span>
-        <h3>Catálogos digitais</h3>
-        <p>Organize e apresente seus produtos ou serviços em uma experiência digital prática, moderna e acessível.</p>
-        <ul><li>Apresentação organizada dos produtos.</li><li>Imagens e descrições.</li><li>Navegação intuitiva.</li><li>Botões de contato e consulta.</li><li>Layout adaptado para celulares.</li></ul>
-        <a class="btn" data-wa="catalogo" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Quero um catálogo digital</a>
-      </article>
-    </div>
-  </div>
-</section>
+    <section class="about" id="sobre" aria-labelledby="about-title"><div class="container"><div class="about-top"><span class="eyebrow"><i></i> SOBRE A OGZ</span><span class="mono-tag">NÃO É SÓ ESTAR NA INTERNET.</span></div><div class="about-grid"><h2 class="impact" id="about-title">A GENTE NÃO<br>VENDE SITE.<br>A GENTE VENDE<br><span>POSIÇÃO.</span></h2><div class="manifesto-side"><p class="manifesto" id="manifesto">Um site bonito que ninguém encontra é só um cartão de visita esquecido na gaveta. Na OGZ Corporation, cada detalhe trabalha por um único objetivo: colocar a sua marca na frente de quem já está procurando o que você vende, e transformar esse clique em conversa, orçamento e cliente. Posição na internet é ser visto primeiro, lembrado depois e escolhido no fim. É isso que construímos.</p><a class="text-link" href="#planos">É hora de ocupar o seu lugar <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></div></div>
+      <div class="comparison-grid"><article class="comparison-card glass"><div class="comparison-heading"><span class="comparison-symbol">×</span><h3>Site comum</h3><span class="mono-tag">PRESENÇA SEM DIREÇÃO</span></div><ul><li><svg class="icon" aria-hidden="true"><use href="#close"/></svg>Bonito, mas ninguém acha</li><li><svg class="icon" aria-hidden="true"><use href="#close"/></svg>Lento no celular</li><li><svg class="icon" aria-hidden="true"><use href="#close"/></svg>Botão de contato escondido</li><li><svg class="icon" aria-hidden="true"><use href="#close"/></svg>Sem medir nada</li><li><svg class="icon" aria-hidden="true"><use href="#close"/></svg>Template igual ao do vizinho</li></ul></article><article class="comparison-card ogz-comparison glass"><div class="comparison-heading"><span class="comparison-symbol">↗</span><h3>Posição OGZ</h3><span class="mono-tag">DESIGN COM PROPÓSITO</span></div><ul><li><svg class="icon" aria-hidden="true"><use href="#check"/></svg>Estruturado para ser encontrado no Google</li><li><svg class="icon" aria-hidden="true"><use href="#check"/></svg>Carrega rápido e nasce mobile-first</li><li><svg class="icon" aria-hidden="true"><use href="#check"/></svg>Cada botão leva o lead direto ao seu WhatsApp</li><li><svg class="icon" aria-hidden="true"><use href="#check"/></svg>Pixel e Analytics prontos para anunciar e medir</li><li><svg class="icon" aria-hidden="true"><use href="#check"/></svg>Design sob medida com a cara da sua marca</li></ul></article></div>
+      <div class="position-pillars"><article><span>01</span><div><h3>Posição</h3><p>Estar na frente de quem procura.</p></div></article><article><span>02</span><div><h3>Percepção</h3><p>Parecer a melhor escolha antes do primeiro contato.</p></div></article><article><span>03</span><div><h3>Processo</h3><p>Fazer o lead chegar até você sem atrito.</p></div></article></div><div class="verified-stats" id="verified-stats" hidden></div><div class="about-cta"><span>O próximo nome aqui pode ser o seu.</span><a class="button primary" href="#planos">Quero minha posição <span class="button-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></div></div></section>
 
-<section class="section section--dark" id="sobre">
-  <div class="container">
-    <header class="head"><h2>Mais do que desenvolver sites. Construímos experiências digitais.</h2></header>
-    <div class="assemble" id="montagem">
-      <div class="assemble__stick">
-        <div class="assemble__stage" id="lottie" role="img" aria-label="Animação de um projeto separado em camadas: estrutura, código e design final"></div>
-        <div class="assemble__cap">
-          <p class="assemble__hint">Role para separar o projeto em camadas.</p>
-          <span class="assemble__bar" aria-hidden="true"><i></i></span>
-          <div class="cap is-on" data-from="0"><span>01</span><h3>Design estratégico</h3><p>Cada elemento visual deve ter propósito e contribuir para uma experiência profissional.</p></div>
-          <div class="cap" data-from="20"><span>02</span><h3>Experiência responsiva</h3><p>Sites desenvolvidos para funcionar bem em celulares, tablets e computadores.</p></div>
-          <div class="cap" data-from="42"><span>03</span><h3>Foco no cliente</h3><p>Estruturas pensadas para facilitar a navegação e aproximar empresas de seus clientes.</p></div>
-          <div class="cap" data-from="68"><span>04</span><h3>Atendimento direto</h3><p>Comunicação transparente durante todas as etapas do projeto.</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--light" id="projetos">
-  <div class="container">
-    <header class="head"><h2>Projetos que transformam ideias em experiências digitais.</h2><p>Projetos conceituais são identificados como demonstração e não representam clientes reais da OGZ.</p></header>
-    <!-- Para adicionar um projeto: copie um <article class="project"> e altere imagem, nome, categoria, descrição e link. -->
-    <div class="projects">
-      <article class="project reveal">
-        <div class="project__img thumb thumb--a" role="img" aria-label="Prévia do Projeto Sand Arena"><span>Sand Arena</span></div>
-        <div class="project__body"><span class="tag">Projeto OGZ</span><h3>Sand Arena</h3><p>Projeto desenvolvido pela OGZ. Detalhes e link de visualização serão disponibilizados em breve.</p>
-        <!-- Quando existir: <a class="link" href="URL" target="_blank" rel="noopener">Visualizar projeto</a> --></div>
-      </article>
-      <article class="project reveal">
-        <div class="project__img thumb thumb--b" role="img" aria-label="Prévia da demonstração de site institucional"><span>Empresa fictícia</span></div>
-        <div class="project__body"><span class="tag tag--demo">Demonstração conceitual</span><h3>Site institucional</h3><p>Exemplo de site para uma empresa fictícia, criado para mostrar estrutura, hierarquia e chamadas para contato.</p></div>
-      </article>
-      <article class="project reveal">
-        <div class="project__img thumb thumb--c" role="img" aria-label="Prévia da demonstração de landing page"><span>Landing page</span></div>
-        <div class="project__body"><span class="tag tag--demo">Demonstração conceitual</span><h3>Landing page</h3><p>Exemplo de página de oferta, criado para demonstrar comunicação objetiva e foco em conversão.</p></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section section--graphite" id="processo">
-  <div class="container">
-    <header class="head"><h2>Do primeiro contato à entrega.</h2></header>
-    <ol class="steps">
-      <li class="reveal"><span>01</span><h3>Conversa</h3><p>Entendemos as necessidades e objetivos da sua empresa.</p></li>
-      <li class="reveal"><span>02</span><h3>Planejamento</h3><p>Definimos estrutura, funcionalidades e direção visual.</p></li>
-      <li class="reveal"><span>03</span><h3>Desenvolvimento</h3><p>Construímos e testamos o projeto.</p></li>
-      <li class="reveal"><span>04</span><h3>Entrega</h3><p>Apresentamos o resultado e orientamos sobre sua utilização.</p></li>
-    </ol>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="container">
-    <h2>Sua empresa está pronta para dar o próximo passo?</h2>
-    <p>Vamos construir uma presença digital que represente o valor do seu negócio.</p>
-    <a class="btn btn--lg" data-wa="geral" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Solicitar uma proposta</a>
-  </div>
-</section>
-
-<section class="section section--light" id="faq">
-  <div class="container container--narrow">
-    <header class="head"><h2>Perguntas frequentes</h2></header>
-    <details><summary>Quanto custa desenvolver um site?</summary><p>O valor depende das necessidades de cada projeto, como tipo de site, quantidade de páginas e conteúdo. Fale conosco pelo WhatsApp para receber uma proposta personalizada.</p></details>
-    <details><summary>Quanto tempo leva para desenvolver?</summary><p>O prazo varia conforme o escopo e a disponibilidade dos materiais. Definimos o cronograma com você durante o planejamento.</p></details>
-    <details><summary>O site funciona em celulares?</summary><p>Sim. Os projetos são desenvolvidos para funcionar bem em celulares, tablets e computadores.</p></details>
-    <details><summary>Posso solicitar alterações?</summary><p>Sim. Ajustes fazem parte do diálogo durante o projeto. As condições para alterações são combinadas na proposta.</p></details>
-    <details><summary>A OGZ atende empresas de outras cidades?</summary><p>Sim. Estamos em Apucarana, Paraná, e atendemos empresas de todo o Brasil, com comunicação online.</p></details>
-    <details><summary>A hospedagem e o domínio estão incluídos?</summary><p>Isso depende do projeto. Hospedagem e domínio são definidos junto com o escopo e informados na proposta.</p></details>
-  </div>
-</section>
-
-<section class="section section--dark" id="contato">
-  <div class="container contact">
-    <div>
-      <h2>Vamos conversar sobre seu projeto?</h2>
-      <ul class="info">
-        <li><span>WhatsApp</span><a data-wa="geral" href="https://wa.me/5543999539585" target="_blank" rel="noopener">+55 43 99953-9585</a></li>
-        <li data-instagram hidden><span>Instagram</span><a data-instagram-link href="#contato" target="_blank" rel="noopener">Siga a OGZ</a></li>
-        <li><span>Atendimento</span>Todo o Brasil</li>
-        <li><span>Localização</span>Apucarana, Paraná</li>
-      </ul>
-    </div>
-    <form class="form" id="form" novalidate>
-      <label>Nome<input name="nome" type="text" autocomplete="name" required></label>
-      <label>Empresa<input name="empresa" type="text" autocomplete="organization"></label>
-      <label>Serviço de interesse
-        <select name="servico"><option>Site institucional</option><option>Landing page</option><option>Catálogo digital</option><option>Ainda não sei</option></select>
-      </label>
-      <label>Mensagem<textarea name="mensagem" rows="4" required></textarea></label>
-      <p class="form__err" id="erro" role="alert" hidden>Preencha seu nome e a mensagem para continuar.</p>
-      <button class="btn" type="submit">Enviar pelo WhatsApp</button>
-    </form>
-  </div>
-</section>
-</main>
-
-<footer class="footer">
-  <div class="container footer__grid">
-    <div><a class="logo" href="#inicio" aria-label="OGZ CORPORATION"><span class="logo__mark">OGZ</span><span class="logo__sub">CORPORATION</span></a><p>Soluções digitais para empresas que querem fortalecer sua presença online.</p></div>
-    <nav aria-label="Navegação do rodapé"><h3>Navegação</h3><a href="#inicio">Início</a><a href="#servicos">Serviços</a><a href="#projetos">Projetos</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></nav>
-    <div><h3>Serviços</h3><a data-wa="institucional" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Sites institucionais</a><a data-wa="landing" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Landing pages</a><a data-wa="catalogo" href="https://wa.me/5543999539585" target="_blank" rel="noopener">Catálogos digitais</a></div>
-    <div><h3>Contato</h3><a data-wa="geral" href="https://wa.me/5543999539585" target="_blank" rel="noopener">WhatsApp</a><a data-instagram data-instagram-link hidden href="#contato" target="_blank" rel="noopener">Instagram</a></div>
-  </div>
-  <p class="copy">© <span id="ano">2026</span> OGZ CORPORATION. Todos os direitos reservados.</p>
-</footer>
-
-<a class="float" data-wa="geral" href="https://wa.me/5543999539585" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
-  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8s-.4-.1-.6.100-.6.8-.8 1-.3.2-.5.100a6.700 6.700 0 0 1-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.1 0-.3 0-.4l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.300 3 3 0 0 0-.9 2.200 5.300 5.300 0 0 0 1.100 2.800 12 12 0 0 0 4.600 4c1.700.7 2.400.8 3.300.7a2.800 2.800 0 0 0 1.800-1.300 2.200 2.200 0 0 0 .2-1.300c-.1-.1-.3-.2-.5-.3Z"/></svg>
-</a>
-<script src="layers.js"></script>
-<script src="player.js"></script>
-<script src="script.js"></script>
+    <section class="plans" id="planos" aria-labelledby="plans-title"><div class="plans-aura" aria-hidden="true"></div><div class="container"><header class="plans-heading"><span class="trust-badge glass"><svg class="icon" aria-hidden="true"><use href="#spark"/></svg>Sob medida · Investimento único · Sem mensalidade da agência</span><h2 class="impact" id="plans-title">ESCOLHA COMO VOCÊ<br><span>VAI APARECER NA INTERNET.</span></h2><p>O benefício vem primeiro. O investimento, logo depois.<br>Escolha a experiência que faz sentido para a sua marca.</p></header><div class="plan-grid">
+      <article class="plan-card glass" data-plan="landing"><span class="plan-grain halftone" aria-hidden="true"></span><div class="plan-content"><span class="plan-label">DIRETO AO PONTO</span><h3>Landing Page</h3><p class="plan-description">Uma página criada para uma coisa: gerar contatos.</p><ul class="plan-benefits"><li><span class="benefit-check" aria-hidden="true">✓</span>Página estratégica de alta conversão: promessa, prova, oferta e chamada para ação.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Textos persuasivos escritos para o seu nicho. Copy inclusa.</li><li><span class="benefit-check" aria-hidden="true">✓</span>WhatsApp com mensagem pronta em pontos estratégicos.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Formulário de captura de leads.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Carregamento otimizado, com meta de Lighthouse 90+.</li><li><span class="benefit-check" aria-hidden="true">✓</span>100% responsiva, pensada primeiro para o celular.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Meta Pixel e Google Analytics configurados para anunciar e medir.</li><li><span class="benefit-check" aria-hidden="true">✓</span>SEO básico: títulos, descrição e dados estruturados.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Configuração de domínio e certificado SSL.</li><li><span class="benefit-check" aria-hidden="true">✓</span>1 rodada de ajustes incluída.</li></ul><div class="plan-investment"><span>INVESTIMENTO ÚNICO</span><strong>R$ <b data-price>400</b><small>,00</small></strong><p data-installment>Consulte parcelamento em até 12x no cartão.</p></div><a class="button plan-button secondary" data-whatsapp data-plan-link="landing" href="https://wa.me/554399539585?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20OGZ%20e%20quero%20o%20plano%20Landing%20Page." target="_blank" rel="noopener noreferrer">Quero esse <span class="button-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></div></article>
+      <article class="plan-card featured glass" data-plan="3d"><span class="featured-badge"><i></i> DESTAQUE OGZ</span><span class="plan-grain halftone" aria-hidden="true"></span><div class="plan-content"><span class="plan-label">PARA SER INESQUECÍVEL</span><h3>Site 3D</h3><p class="plan-description">O site que ninguém esquece.</p><ul class="plan-benefits"><li><span class="benefit-check" aria-hidden="true">✓</span>Tudo do Site Institucional, mais uma experiência que impressiona.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Cena 3D interativa que reage ao mouse e à rolagem.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Animações fluidas, no nível dos sites de grandes marcas.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Vidro, luz, parallax e microinterações.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Modo leve automático para celulares com menos desempenho.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Identidade visual exclusiva, sem template.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Uma experiência criada para ser lembrada e compartilhada.</li><li><span class="benefit-check" aria-hidden="true">✓</span>3 rodadas de ajustes incluídas.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Suporte pós-entrega por 30 dias.</li></ul><div class="plan-investment"><span>INVESTIMENTO ÚNICO</span><strong>R$ <b data-price>600</b><small>,00</small></strong><p data-installment>Consulte parcelamento em até 12x no cartão.</p></div><a class="button plan-button primary" data-whatsapp data-plan-link="3d" href="https://wa.me/554399539585?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20OGZ%20e%20quero%20o%20plano%20Site%203D." target="_blank" rel="noopener noreferrer">Quero esse <span class="button-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></div></article>
+      <article class="plan-card glass" data-plan="institucional"><span class="plan-grain halftone" aria-hidden="true"></span><div class="plan-content"><span class="plan-label">PRESENÇA QUE PASSA CONFIANÇA</span><h3>Site Institucional</h3><p class="plan-description">A presença profissional que passa confiança.</p><ul class="plan-benefits"><li><span class="benefit-check" aria-hidden="true">✓</span>Tudo da Landing Page, com espaço para contar sua história.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Até 5 páginas: Início, Sobre, Serviços, Contato + 1 extra.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Design sob medida com a identidade da sua marca.</li><li><span class="benefit-check" aria-hidden="true">✓</span>SEO local: Search Console, sitemap e dados estruturados.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Mapa do Google e WhatsApp flutuante.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Páginas de serviço individuais para estruturar sua presença nas buscas.</li><li><span class="benefit-check" aria-hidden="true">✓</span>2 rodadas de ajustes incluídas.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Vídeo curto ensinando a editar textos e imagens.</li><li><span class="benefit-check" aria-hidden="true">✓</span>Suporte pós-entrega por 15 dias.</li></ul><div class="plan-investment"><span>INVESTIMENTO ÚNICO</span><strong>R$ <b data-price>500</b><small>,00</small></strong><p data-installment>Consulte parcelamento em até 12x no cartão.</p></div><a class="button plan-button secondary" data-whatsapp data-plan-link="institucional" href="https://wa.me/554399539585?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20OGZ%20e%20quero%20o%20plano%20Site%20Institucional." target="_blank" rel="noopener noreferrer">Quero esse <span class="button-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></div></article>
+    </div><div class="confidence-row"><span><svg class="icon" aria-hidden="true"><use href="#shield"/></svg>Código e domínio seus, sem mensalidade da agência</span><span><svg class="icon" aria-hidden="true"><use href="#eye"/></svg>Você aprova o layout antes de seguir</span><span><svg class="icon" aria-hidden="true"><use href="#message"/></svg>Atendimento direto com quem faz o site</span></div><p class="plan-fineprint">Investimento único no projeto. Domínio, hospedagem e serviços externos podem ter custos próprios. Condições de pagamento, escopo e prazo são confirmados no orçamento. A meta de desempenho depende do conteúdo, das integrações e da hospedagem.</p></div></section>
+  </main>
+  <footer class="footer container"><div class="footer-main"><a class="ogz-mark" href="#inicio" aria-label="Voltar ao início da OGZ Corporation">OGZ<span>•</span></a><span class="footer-signature">SUA MARCA. NO LUGAR CERTO.</span><nav aria-label="Redes e contato"><a href="https://www.instagram.com/ogz.coporation/" id="footer-instagram" target="_blank" rel="noopener noreferrer">Instagram <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a><a href="https://wa.me/554399539585" data-whatsapp id="footer-whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a><a id="footer-email" hidden>E-mail <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></nav></div><div class="footer-bottom"><span>© <span id="year">2026</span> OGZ Corporation. Todos os direitos reservados.</span><span>DESIGN. POSIÇÃO. PROCESSO.</span></div></footer>
+  <a class="whatsapp-float glass" data-whatsapp href="https://wa.me/554399539585" target="_blank" rel="noopener noreferrer" aria-label="Conversar com a OGZ no WhatsApp"><svg class="icon" aria-hidden="true"><use href="#message"/></svg><span>Vamos tirar sua ideia do papel?</span></a><div class="mobile-sticky"><span>SEU PRÓXIMO<br>PASSO COMEÇA AQUI.</span><a class="button primary" href="#planos">Pedir orçamento <span class="button-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></div><div class="custom-cursor" aria-hidden="true"><span>ARRASTE</span></div>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script type="module" src="./src/app.js"></script>
 </body>
 </html>
