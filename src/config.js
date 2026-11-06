@@ -2,7 +2,7 @@
 export const CONFIG={
   name:'OGZ CORPORATION', founder:'vinxz.ogz',
   whatsapp:'554399539585', whatsappDisplay:'(43) 9953-9585',
-  instagram:'https://www.instagram.com/ogz.coporation/', instagramHandle:'@ogz.coporation',
+  instagram:'https://www.instagram.com/ogz.corporation/', instagramHandle:'@ogz.corporation',
   domain:'', email:'', portrait:'./assets/ogz-fundador.webp',
   installment:'Consulte parcelamento em até 12x no cartão.',
   stats:null // Only verified figures: {sites:5,clients:0,deliveryDays:0}. null hides this strip.
