@@ -18,7 +18,7 @@ export const SITES=[
 ];
 
 export const PLANS=[
-  {id:'landing',name:'Landing Page',label:'DIRETO AO PONTO',price:400,description:'Uma página criada para uma coisa: gerar contatos.',benefits:[
+  {id:'landing',name:'Landing Page',label:'DIRETO AO PONTO',price:400,description:'Dê ao interesse um caminho até o orçamento.',benefits:[
     'Página estratégica de alta conversão: promessa, prova, oferta e chamada para ação.',
     'Textos persuasivos escritos para o seu nicho. Copy inclusa.',
     'WhatsApp com mensagem pronta em pontos estratégicos.',
@@ -30,7 +30,7 @@ export const PLANS=[
     'Configuração de domínio e certificado SSL.',
     '1 rodada de ajustes incluída.'
   ]},
-  {id:'3d',name:'Site 3D',label:'PARA SER INESQUECÍVEL',price:600,description:'O site que ninguém esquece.',featured:true,benefits:[
+  {id:'3d',name:'Site 3D',label:'PARA SER INESQUECÍVEL',price:600,description:'Uma experiência que diferencia sua marca.',featured:true,benefits:[
     'Tudo do Site Institucional, mais uma experiência que impressiona.',
     'Cena 3D interativa que reage ao mouse e à rolagem.',
     'Animações fluidas, no nível dos sites de grandes marcas.',
@@ -41,7 +41,7 @@ export const PLANS=[
     '3 rodadas de ajustes incluídas.',
     'Suporte pós-entrega por 30 dias.'
   ]},
-  {id:'institucional',name:'Site Institucional',label:'PRESENÇA QUE PASSA CONFIANÇA',price:500,description:'A presença profissional que passa confiança.',benefits:[
+  {id:'institucional',name:'Site Institucional',label:'PRESENÇA QUE PASSA CONFIANÇA',price:500,description:'Mostre seu valor antes de discutir preço.',benefits:[
     'Tudo da Landing Page, com espaço para contar sua história.',
     'Até 5 páginas: Início, Sobre, Serviços, Contato + 1 extra.',
     'Design sob medida com a identidade da sua marca.',

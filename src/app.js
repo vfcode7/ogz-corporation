@@ -11,13 +11,13 @@ const initialHash=location.hash;if(ST)document.documentElement.style.scrollBehav
 window.dataLayer=window.dataLayer||[];const track=(event,details={})=>window.dataLayer.push({event,...details});
 const phone=CONFIG.whatsapp.replace(/\D/g,'');
 const waURL=message=>`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-const defaultMessage='Olá! Vim pelo site da OGZ e quero conversar sobre o site da minha marca.';
+const defaultMessage='Olá! Vim pelo site da OGZ e quero conversar sobre uma solução digital para o meu negócio.';
 $$('[data-founder]').forEach(el=>el.textContent=CONFIG.founder);$('#year').textContent=new Date().getFullYear();
 $('#founder-photo').src=CONFIG.portrait;$('#founder-photo').srcset=`assets/ogz-fundador-mobile.webp 600w, ${CONFIG.portrait} 1092w`;$('#founder-photo').sizes='(max-width: 800px) 100vw, 70vw';$('#founder-photo').alt=`${CONFIG.founder}, fundador da OGZ Corporation, de camisa branca e gravata, com uma jaqueta no braço`;
 const brandWords=CONFIG.name.trim().split(/\s+/),firstWord=brandWords.shift();
 $$('.word-ogz').forEach(el=>el.textContent=firstWord);$$('.word-corporation').forEach(el=>el.textContent=brandWords.join(' '));
 $$('.ogz-mark').forEach(el=>el.firstChild.textContent=firstWord);$('#hero-title').setAttribute('aria-label',CONFIG.name);
-document.title=`${CONFIG.name} — Não é só um site. É a sua posição.`;
+document.title=`${CONFIG.name} — Soluções digitais. Novas oportunidades.`;
 const schema=JSON.parse($('#business-schema').textContent);schema.name=CONFIG.name;schema.founder.name=CONFIG.founder;
 schema.hasOfferCatalog.itemListElement=PLANS.map(plan=>({'@type':'Offer',priceCurrency:'BRL',price:String(plan.price),itemOffered:{'@type':'Service',name:plan.name}}));
 if(CONFIG.domain){try{const url=new URL(CONFIG.domain.startsWith('http')?CONFIG.domain:`https://${CONFIG.domain}`);schema.url=url.href;const canonical=document.createElement('link');canonical.rel='canonical';canonical.href=url.href;document.head.append(canonical);$('#hero-domain').href=url.href;$('#hero-domain').firstChild.textContent=url.hostname;$('meta[property="og:image"]').content=new URL('assets/ogz-fundador.png',url).href}catch{}}
@@ -61,9 +61,7 @@ if(gsap&&ST&&!reduced){
   gsap.to('.portrait-scroll',{yPercent:-8,filter:mobile?'brightness(.72)':'brightness(.38)',ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
   const manifesto=$('#manifesto'),text=manifesto.textContent;manifesto.setAttribute('aria-label',text);manifesto.replaceChildren(...text.split(/\s+/).flatMap((word,index)=>{const span=document.createElement('span');span.className='word';span.textContent=word;span.setAttribute('aria-hidden','true');return [document.createTextNode(index?' ':''),span]}));
   gsap.fromTo('.manifesto .word',{color:'#52554b'},{color:'#f4ecdc',stagger:.08,ease:'none',scrollTrigger:{trigger:'.about-grid',start:'top 85%',end:'bottom 30%',scrub:1}});
-  $$('.cases-heading,.case-pillars article,.about h2,.comparison-card,.position-pillars article,.plans-heading').forEach(el=>gsap.from(el,{opacity:0,y:25,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%',once:true}}));
-  // Keep transforms on pricing shells reserved for hover tilt; reveal their inner content instead.
-  $$('.plan-content').forEach((el,index)=>gsap.from(el,{opacity:0,y:30,duration:1,delay:index*.08,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 94%',once:true}}));
+
 }
 if(gsap&&!reduced){
   if(fine){const hero=$('.hero'),photoX=gsap.quickTo('.portrait-mouse','x',{duration:1.1,ease:'power3.out'}),photoY=gsap.quickTo('.portrait-mouse','y',{duration:1.1,ease:'power3.out'});const types=$$('.type-parallax').map(el=>({x:gsap.quickTo(el,'x',{duration:1.2,ease:'power3.out'}),y:gsap.quickTo(el,'y',{duration:1.2,ease:'power3.out'})}));hero.addEventListener('pointermove',event=>{const r=hero.getBoundingClientRect(),x=(event.clientX-r.left)/r.width-.5,y=(event.clientY-r.top)/r.height-.5;photoX(x*20);photoY(y*20);types.forEach(to=>{to.x(-x*44);to.y(-y*22)})});hero.addEventListener('pointerleave',()=>{photoX(0);photoY(0);types.forEach(to=>{to.x(0);to.y(0)})})}
@@ -89,19 +87,40 @@ const heroContactObserver=new IntersectionObserver(entries=>$('.whatsapp-float')
 
 initProjectViewer({onOpen:()=>lenis?.stop(),onClose:()=>lenis?.start()});
 
-const planLayout=matchMedia('(max-width: 800px)');
-function updatePlanDetails(){ $$('.plan-details').forEach(detail=>detail.open=!planLayout.matches) }
-updatePlanDetails();planLayout.addEventListener('change',updatePlanDetails);
-
-// Native details remain accessible; prevent scroll anchoring and keep each toggle in place.
+// Benefits stay collapsed on every screen, including after resizing.
 $$('.plan-details').forEach(detail=>{
  const summary=$('summary',detail);
  summary.addEventListener('click',event=>{
-  if(!planLayout.matches)return;
-  event.preventDefault();const pageY=window.scrollY,rail=$('.plan-grid'),railX=rail.scrollLeft;
+  event.preventDefault();
+  const pageY=window.scrollY,rail=$('.plan-grid'),railX=rail.scrollLeft;
   detail.open=!detail.open;
-  if(detail.open)$('.plan-benefits',detail).scrollTop=0;
   summary.firstChild.textContent=detail.open?'Ocultar benefícios ':'Ver tudo que está incluído ';
   requestAnimationFrame(()=>{rail.scrollLeft=railX;window.scrollTo({top:pageY,behavior:'instant'});ST?.refresh()});
  });
 });
+
+// Scroll entrances run independently of CDN animation libraries.
+if(!reduced && 'IntersectionObserver' in window){
+ const revealElements=$$('.cases-heading,.case-pillars article,.about h2,.manifesto-side,.comparison-card,.position-pillars article,.about-cta,.plans-heading,.plan-content,.confidence-row,.footer-main');
+ const revealObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-revealed');revealObserver.unobserve(entry.target)}});
+ },{threshold:0,rootMargin:'0px 0px -45px 0px'});
+ revealElements.forEach((el,index)=>{
+  el.classList.add('scroll-reveal');
+  el.style.setProperty('--reveal-delay',`${(index%3)*75}ms`);
+  revealObserver.observe(el);
+ });
+ // Never hide keyboard-focused content while its entrance is pending.
+ document.addEventListener('focusin',event=>event.target.closest('.scroll-reveal')?.classList.add('is-revealed'));
+ let depthFrame=0;
+ const depth=$('.ambient-depth');
+ const moveDepth=()=>{
+  depthFrame=0;
+  const progress=window.scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight);
+  depth.style.setProperty('--depth-y',`${-progress*140}px`);
+  depth.style.setProperty('--depth-turn',`${progress*7}deg`);
+ };
+ const requestDepth=()=>{if(!depthFrame)depthFrame=requestAnimationFrame(moveDepth)};
+ addEventListener('scroll',requestDepth,{passive:true});moveDepth();
+ addEventListener('pagehide',()=>{revealObserver.disconnect();removeEventListener('scroll',requestDepth);cancelAnimationFrame(depthFrame)},{once:true});
+}

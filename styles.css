@@ -109,3 +109,61 @@ html{overflow-anchor:none}
  .plan-details .plan-benefits{max-height:none;overflow:visible;padding-bottom:8px}
  .plan-details[open]{padding-bottom:6px}
 }
+
+/* Click-to-expand pricing on desktop and mobile; prices remain above details. */
+.plan-grid{align-items:start}
+.plan-content,.featured .plan-content{height:auto}
+.plan-content>.plan-label{order:0}
+.plan-content>h3{order:1}
+.plan-content>.plan-description{order:2}
+.plan-content>.plan-investment{order:3;margin-top:22px}
+.plan-content>.plan-button{order:4}
+.plan-content>.plan-details{order:5;display:block;margin-top:22px;border-top:1px solid #ffffff1c;padding-top:12px;overflow-anchor:none}
+.plan-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;font-size:12px;line-height:1.5;color:#d3dbc5;cursor:pointer;list-style:none}
+.plan-details>summary::-webkit-details-marker{display:none}
+.plan-details>summary:focus-visible{outline:2px solid var(--volt);outline-offset:4px;border-radius:4px}
+.plan-details>summary span{font-size:22px;color:var(--volt);transition:rotate .3s var(--ease)}
+.plan-details[open]>summary span{rotate:45deg}
+.plan-details:not([open])>.plan-benefits{display:none}
+.plan-details .plan-benefits{margin:18px 0 4px;flex:none;max-height:none;overflow:visible}
+.plan-details[open] .plan-benefits{animation:benefitsReveal .4s var(--ease) both}
+
+/* Real project imagery sits behind translucent surfaces, in separate depth planes. */
+body{isolation:isolate}
+main,.footer{position:relative;z-index:1}
+.ambient-depth{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;perspective:1000px;background:radial-gradient(ellipse at 75% 45%,#34451c30,transparent 65%)}
+.depth-preview{position:absolute;width:clamp(320px,40vw,680px);height:90vh;border:1px solid #c6ff3d40;border-radius:28px;background-size:cover;background-position:top;filter:grayscale(1);box-shadow:0 0 80px #c6ff3d12;opacity:.12;will-change:transform}
+.depth-preview-one{left:-15%;top:12%;background-image:url('./assets/sites/site-3-small.webp');transform:translateY(var(--depth-y,0px)) rotateY(24deg) rotateZ(calc(-14deg + var(--depth-turn,0deg)))}
+.depth-preview-two{right:-15%;top:28%;background-image:url('./assets/sites/site-2-small.webp');transform:translateY(calc(var(--depth-y,0px)*-.6)) rotateY(-24deg) rotateZ(calc(14deg - var(--depth-turn,0deg)))}
+.depth-grid{position:absolute;inset:30% -30% -50%;opacity:.17;background-image:linear-gradient(#c6ff3d30 1px,transparent 1px),linear-gradient(90deg,#c6ff3d30 1px,transparent 1px);background-size:100px 100px;transform:rotateX(66deg) translateY(var(--depth-y,0px));mask-image:radial-gradient(ellipse,#000,transparent 65%)}
+.comparison-card,.plan-card{background-color:#10130edb}
+.scroll-reveal{opacity:.12;translate:0 50px;filter:blur(4px);transition:opacity .85s var(--ease),translate .95s var(--ease),filter .85s var(--ease);transition-delay:var(--reveal-delay,0ms)}
+.scroll-reveal.is-revealed{opacity:1;translate:0 0;filter:blur(0)}
+@media(max-width:800px){.depth-preview{opacity:.085;width:75vw}.depth-preview-one{left:-38%}.depth-preview-two{right:-40%}.depth-grid{background-size:70px 70px}.scroll-reveal{translate:0 32px;filter:none}.scroll-reveal.is-revealed{translate:0 0}}
+@media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1;translate:none;filter:none;transition:none}.depth-preview{will-change:auto}.plan-details[open] .plan-benefits{animation:none}.depth-grid{transform:rotateX(66deg)}}
+
+/* Geometric typography for the marked brand and manifesto, preserving their layers. */
+.ogz-mark{font-family:'Space Grotesk',Inter,sans-serif;font-weight:700;font-size:34px;letter-spacing:-.07em;line-height:1}
+.hero-type{font-family:'Space Grotesk',Inter,sans-serif;font-weight:700;letter-spacing:-.055em}
+.hero-word{font-weight:700}
+.word-ogz{font-size:clamp(220px,29vw,560px);letter-spacing:-.07em;line-height:.9}
+.word-corporation{font-size:clamp(54px,9.6vw,160px);letter-spacing:.005em;line-height:1.1;margin-top:30px}
+.type-front .hero-type{-webkit-text-stroke:1px var(--cream)}
+.type-front .word-corporation{-webkit-text-stroke:.8px var(--cream)}
+#about-title{font-family:'Space Grotesk',Inter,sans-serif;font-weight:600;font-size:clamp(32px,4vw,62px);line-height:1.14;letter-spacing:-.055em}
+@media(max-width:800px){.word-ogz{font-size:41vw}.word-corporation{font-size:9.8vw;margin-top:22px}#about-title{font-size:4.2vw}.ogz-mark{font-size:30px}}
+@media(max-width:600px){.hero-word.word-ogz{font-size:57vw}.hero-word.word-corporation{font-size:9.8vw;margin-top:18px}#about-title{font-size:clamp(30px,8.2vw,46px);line-height:1.18}.ogz-mark{font-size:30px}}
+@media(min-width:601px) and (max-height:750px){.word-ogz{font-size:min(29vw,45svh)}.word-corporation{font-size:min(9.6vw,15svh);margin-top:22px}}
+
+/* Rounded, substantial brand lettering; editorial headings stay unchanged. */
+.ogz-mark{font-family:'Nunito',Arial,sans-serif;font-weight:1000;letter-spacing:-.055em}
+.hero-type{font-family:'Nunito',Arial,sans-serif;font-weight:1000}
+.hero-word{font-weight:1000}
+.word-ogz{letter-spacing:-.055em}
+.word-corporation{letter-spacing:0}
+
+/* Only the two mobile logo fixes: fit the large word and keep its small dot inline. */
+@media(max-width:600px){
+ .hero-word.word-ogz{font-size:43vw;min-height:51.3vw}
+ .hero-header .ogz-mark{white-space:nowrap;flex-shrink:0}
+}
