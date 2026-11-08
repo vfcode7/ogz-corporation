@@ -4,7 +4,11 @@ import {createCarousel} from './carousel.js';
 
 const $=(selector,root=document)=>root.querySelector(selector),$$=(selector,root=document)=>[...root.querySelectorAll(selector)];
 const mobile=matchMedia('(max-width: 800px)').matches;
-const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=!mobile&&matchMedia('(hover: hover) and (pointer: fine)').matches;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(hover: hover) and (pointer: fine)').matches;
+// Wait for the local deferred dependencies before choosing animation or fallback mode.
+if(document.readyState==='loading'){
+  await new Promise(resolve=>document.addEventListener('DOMContentLoaded',resolve,{once:true}));
+}
 const gsap=window.gsap,ST=window.ScrollTrigger;if(gsap&&ST)gsap.registerPlugin(ST);
 // Normalize restored fragment scroll before measuring any animation trigger.
 const initialHash=location.hash;if(ST)document.documentElement.style.scrollBehavior='auto';history.scrollRestoration='manual';window.scrollTo({top:0,left:0,behavior:'instant'});ST?.clearScrollMemory('manual');
@@ -77,7 +81,20 @@ function enter(){if(loaded)return;loaded=true;fitTypography();document.body.styl
 const timeout=setTimeout(enter,3500);
 Promise.all([document.fonts?.ready||Promise.resolve(),$('#founder-photo').decode().catch(()=>null)]).finally(()=>{clearTimeout(timeout);enter()});
 $('#founder-photo').addEventListener('error',()=>{if(!$('#founder-photo').src.endsWith('ogz-fundador.png'))$('#founder-photo').src='./assets/ogz-fundador.png'});
-addEventListener('pagehide',()=>{gallery.destroy();lenis?.destroy();if(gsap)gsap.ticker.remove(tick);if(fallbackFrame)cancelAnimationFrame(fallbackFrame)},{once:true});
+// A back/forward-cache entry is paused, not destroyed: the same document resumes.
+addEventListener('pagehide',event=>{
+  if(gsap)gsap.ticker.remove(tick);
+  if(fallbackFrame)cancelAnimationFrame(fallbackFrame);
+  fallbackFrame=null;
+  if(event.persisted){lenis?.stop();return}
+  gallery.destroy();lenis?.destroy();
+});
+addEventListener('pageshow',event=>{
+  if(!event.persisted)return;
+  lastTime=0;syncTicker();gallery.resize();
+  if(!$('#project-viewer').open)lenis?.start();
+  ST?.refresh();ST?.update();
+});
 
 // Refit after a slow font response even if the bounded loader has already released.
 document.fonts?.ready.then(fitTypography);
@@ -122,5 +139,8 @@ if(!reduced && 'IntersectionObserver' in window){
  };
  const requestDepth=()=>{if(!depthFrame)depthFrame=requestAnimationFrame(moveDepth)};
  addEventListener('scroll',requestDepth,{passive:true});moveDepth();
- addEventListener('pagehide',()=>{revealObserver.disconnect();removeEventListener('scroll',requestDepth);cancelAnimationFrame(depthFrame)},{once:true});
+ addEventListener('pagehide',event=>{
+  if(event.persisted)return;
+  revealObserver.disconnect();removeEventListener('scroll',requestDepth);cancelAnimationFrame(depthFrame);
+});
 }
