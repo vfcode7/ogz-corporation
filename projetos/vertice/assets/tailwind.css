@@ -1,0 +1,6 @@
+/* Build from repository root:
+   npx tailwindcss@3.4.17 -c projetos/vertice/tailwind.config.cjs -i projetos/vertice/assets/tailwind.css -o projetos/vertice/assets/utilities.css --minify
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
