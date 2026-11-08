@@ -13,7 +13,7 @@ export const SITES=[
   {name:'YU.MED',category:'Odontologia · Landing page',url:'./projetos/yumed/',image:'./assets/sites/site-1.webp',imageFallback:'./assets/sites/site-1.jpg',alt:'Site da YU.MED com fotografia de um sorriso, tipografia editorial e painéis de vidro azul-marinho'},
   {name:'KINETIC',category:'Fisioterapia · Institucional',url:'./projetos/kinetic/',image:'./assets/sites/site-2.webp',imageFallback:'./assets/sites/site-2.jpg',alt:'Site da KINETIC em preto e branco com fotografia de fisioterapia e composição minimalista'},
   {name:'NEXO',category:'Contabilidade · Experiência 3D',url:'./projetos/nexo/',image:'./assets/sites/site-3.webp',imageFallback:'./assets/sites/site-3.jpg',alt:'Site da NEXO com contador, detalhes dourados e uma cena financeira tridimensional'},
-  {name:'VÉRTICE',category:'Automotivo · Imersivo',url:'./projetos/vertice/',image:'./assets/sites/site-4.webp',imageFallback:'./assets/sites/site-4.jpg',alt:'Site Vértice de estética automotiva com carros e uma identidade visual de alto contraste'},
+  {name:'VÉRTICE',category:'Automotivo · Imersivo',url:'./projetos/vertice/',image:'./assets/sites/site-4.webp',imageFallback:'./assets/sites/site-4.jpg',alt:'Site Vértice com fotos reais de detalhamento automotivo e serviços em azul e preto'},
   {name:'BRUTO BURGER',category:'Gastronomia · Interativo',url:'./projetos/bruto/',image:'./assets/sites/site-5.webp',imageFallback:'./assets/sites/site-5.jpg',alt:'Site da BRUTO BURGER com hambúrguer artesanal, tipografia marcante e cardápio interativo'}
 ];
 
